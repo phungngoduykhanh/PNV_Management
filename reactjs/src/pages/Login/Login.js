@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faL } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -16,9 +16,10 @@ function Login() {
     };
 
     /*------hadle form login------*/
-    const [formData, setFormData] = useState({ email: '', password: '', role: '' });
+    const [formData, setFormData] = useState({ email: '', password: ''});
     const navigate = useNavigate();
-
+    
+    console.log(formData);
 
     const handleLogin = async () => {
         try {
@@ -37,6 +38,15 @@ function Login() {
             } else {
                 toast.error('Invalid email or password');
             }
+            if (rmbAccount) {
+                localStorage.setItem('email', formData.email );
+                localStorage.setItem('password',formData.password );
+                localStorage.setItem('checked', rmbAccount);
+            }else{
+                localStorage.removeItem('email');
+                localStorage.removeItem('password');
+                localStorage.removeItem('checked');
+            }
         } catch (error) {
             console.error(error);
             toast.error('Login failed. Please try again.');
@@ -47,6 +57,27 @@ function Login() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    // remember account
+    const [rmbAccount, setRmbAccount] = useState(false);
+
+    useEffect(() => {
+        const storedEmail = localStorage.getItem('email');
+        const storedPassword = localStorage.getItem('password');
+        const storedChecked = localStorage.getItem('checked');
+
+        if (storedEmail && storedPassword && storedChecked) {
+            setFormData({
+                email: storedEmail,
+                password:storedPassword
+            })
+          setRmbAccount(storedChecked);
+        }
+      }, []);
+
+    const handleRmbAccountChange=()=>{
+        setRmbAccount(!rmbAccount);
     };
 
     return (
@@ -86,7 +117,7 @@ function Login() {
                 </div>
                 <div className="login-bottom">
                     <div className="login-remember">
-                        <input type="checkbox" id="Remember-me" name="Remember-me" defaultChecked />
+                        <input type="checkbox" id="Remember-me" name="Remember-me" checked={rmbAccount} onChange={handleRmbAccountChange}/>
                         Remember me
                     </div>
                     <div className="login-forgot">Forgot password?</div>
