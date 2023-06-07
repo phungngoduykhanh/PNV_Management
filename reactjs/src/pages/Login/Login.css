@@ -1,0 +1,121 @@
+
+/*------Login CSS-------*/
+
+.container{
+  max-width:50%;
+  margin:auto;
+  text-align:center;
+  margin-top: 50px;
+}
+.container *{
+  box-sizing:border-box;
+  /* border-radius:5px; */
+}
+
+
+.login-form{
+    background: rgba(0, 0, 0, 1);
+    color:rgba(255, 255, 255, 1);
+    padding:40px;
+    position: relative;
+}
+
+.login-icon i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  width: 100%;
+  height: 100%;
+}
+
+.login-icon {
+  background-color:rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 1);
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.login-form .login-title{
+  font-size:38px;
+  font-weight:300;
+  margin:0px 0px 45px 0px;
+}
+
+.login-form .login-input{
+  display:block;
+  margin: 20px auto;
+  width:100%;
+  padding:15px 30px 15px 15px;
+  font-size:18px;
+  color:rgba(255, 255, 255, 1);
+  background:rgba(0, 0, 0, 1);
+
+  border: none;
+  border-bottom: 5px solid rgba(255, 255, 255, 1);
+  outline: none;
+}
+
+
+.login-form .login-input.button{
+  border:none;
+  color:white;
+  background:rgba(53, 166, 242, 1);
+  border-radius:5px;
+
+}
+
+.login-form .login-input.button:hover{
+     background:#0080FF;
+}
+
+
+.login-input-parts .input-container {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+
+
+.login-input-parts span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.login-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.login-forgot{
+  text-decoration:underline;
+  font-size:14px;
+  color:rgba(255, 255, 255, 1)  ;
+}
+
+.login-signup{
+  color:#FFF;
+  margin:20px 0px;
+}
+
+.login-signup a{
+  color:#FFF;
+  font-weight:600;
+}
+
+/* Show/hide password Font Icon */
+#eye {
+  cursor: pointer;
+}
