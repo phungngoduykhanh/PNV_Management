@@ -1,0 +1,40 @@
+.wrapper {
+    background-color: rgba(0, 0, 0, 1);
+    padding: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.logo{
+    display: block;
+    width: 111px;
+    height: 111px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: 0 auto;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    margin-left: 33%;
+    justify-content: space-between;
+    height: 100%;
+    margin-bottom: 50px;
+}
+
+
+@media (min-width: 768px) {
+    .wrapper {
+      width: 19%;
+      flex: 1;
+    }
+  }
