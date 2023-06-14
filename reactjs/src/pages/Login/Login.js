@@ -7,7 +7,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
-
     /*----- handle Show/hide password*/
     const [pwShown, setPwShown] = useState(false);
 
@@ -15,7 +14,7 @@ function Login() {
         setPwShown(!pwShown);
     };
 
-    /*------hadle form login------*/
+    /*------handle form login------*/
     const [formData, setFormData] = useState({ email: '', password: '', role: '' });
     const navigate = useNavigate();
 
@@ -23,6 +22,7 @@ function Login() {
         try {
             const response = await axios.get('http://localhost:3000/users', { params: { email: formData.email.toLowerCase() } });
             const userData = response.data[0];
+            console.log(response.data[0]);
 
             if (userData && userData.password.toLowerCase() === formData.password.toLowerCase()) {
                 const { role } = userData;
@@ -30,8 +30,13 @@ function Login() {
                 if (role === 'admin') {
                     navigate('/admin');
                 } else {
-                    navigate('/home');
-                    toast.success('Login successful');
+                    if (role === 'teacher') {
+                        navigate('/homeTecher');
+                        toast.success('Login successful');
+                    } else {
+                        navigate('/homeStudent');
+                        toast.success('Login successful');
+                    }
                 }
             } else {
                 toast.error('Invalid email or password');
@@ -42,13 +47,15 @@ function Login() {
         }
     };
 
-
-
-
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+   const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'email') {
+        setFormData({ ...formData, [name]: value.toLowerCase() });
+    } else {
+        setFormData({ ...formData, [name]: value });
+    }
     };
+
 
     return (
         <div className="container-login">
