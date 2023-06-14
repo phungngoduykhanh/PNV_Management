@@ -81,7 +81,7 @@ function Login() {
     };
 
     return (
-        <div className="container">
+        <div className="container-login">
             <div className="login-form">
                 <div className="login-icon">
                     <i className="fa-sharp fa-solid fa-xmark" />
