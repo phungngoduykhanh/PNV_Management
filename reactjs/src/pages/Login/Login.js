@@ -19,13 +19,12 @@ function Login() {
     const [formData, setFormData] = useState({ email: '', password: '', role: '' });
     const navigate = useNavigate();
 
-
     const handleLogin = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/users', { params: { email: formData.email } });
+            const response = await axios.get('http://localhost:3000/users', { params: { email: formData.email.toLowerCase() } });
             const userData = response.data[0];
 
-            if (userData && userData.password === formData.password) {
+            if (userData && userData.password.toLowerCase() === formData.password.toLowerCase()) {
                 const { role } = userData;
 
                 if (role === 'admin') {
@@ -42,6 +41,8 @@ function Login() {
             toast.error('Login failed. Please try again.');
         }
     };
+
+
 
 
 
