@@ -4,7 +4,7 @@
       "id": 1,
       "email": "hoty@123.com",
       "password":"12345",
-      "role": "user"
+      "role": "teacher"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "id": 3,
       "email": "khanhphung@123.com",
       "password":"12345",
-      "role": "user"
+      "role": "teacher"
     }
   ]
 }
