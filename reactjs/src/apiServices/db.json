@@ -3,7 +3,7 @@
     {
       "id": 1,
       "email": "hoty@123.com",
-      "password":"12345",
+      "password": "12345",
       "role": "teacher"
     },
     {
@@ -15,8 +15,132 @@
     {
       "id": 3,
       "email": "khanhphung@123.com",
-      "password":"12345",
+      "password": "12345",
       "role": "teacher"
+    },
+    {
+      "id": 4,
+      "email": "hieunguye@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 5,
+      "email": "quandang@123.com",
+      "password": "12345",
+      "role": "student"
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "teacherEmail": "khanhphung@123.com",
+      "classes": [
+        {
+          "classId": 1,
+          "className": "PNV 24A",
+          "students": [
+            {
+              "studentId": 1,
+              "studentEmai": "thangnguyen@123.com"
+            },
+            {
+              "studentId": 2,
+              "studentEmail": "hoangthai@123.com"
+            }
+          ],
+          "teachers": [
+            {
+              "teacherId": 1,
+              "teacherName": "Teacher 1"
+            },
+            {
+              "teacherId": 2,
+              "teacherName": "Teacher 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "teacherEmail": "hang@123.com",
+      "classes": [
+        {
+          "classId": 2,
+          "className": "PNV 24B",
+          "students": [
+            {
+              "studentId": 1,
+              "studentEmai": "thangnguyen@123.com"
+            },
+            {
+              "studentId": 2,
+              "studentEmail": "hoangthai@123.com"
+            }
+          ],
+          "teachers": [
+            {
+              "teacherId": 1,
+              "teacherName": "Teacher 1"
+            },
+            {
+              "teacherId": 2,
+              "teacherName": "Teacher 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "teacherEmail": "nhai@123.com",
+      "classes": [
+        {
+          "classId": 2,
+          "className": "PNV 25A",
+          "students": [
+            {
+              "studentId": 1,
+              "studentEmai": "thangnguyen@123.com"
+            },
+            {
+              "studentId": 2,
+              "studentEmail": "hoangthai@123.com"
+            }
+          ],
+          "teachers": [
+            {
+              "teacherId": 1,
+              "teacherName": "Teacher 1"
+            },
+            {
+              "teacherId": 2,
+              "teacherName": "Teacher 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "PNV 26A",
+      "students": [
+        {
+          "studentId": 5,
+          "studentEmail": "quandang@123.com"
+        }
+      ],
+      "teachers": [
+        {
+          "teacherId": 3,
+          "teacherName": "khanhphung@123.com"
+        },
+        {
+          "teacherId": 1,
+          "teacherName": "hoty@123.com"
+        }
+      ],
+      "id": 4
     }
   ]
 }
