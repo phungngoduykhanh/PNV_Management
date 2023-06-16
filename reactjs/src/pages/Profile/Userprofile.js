@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './Userprofile.css'; // Import the CSS file for styling
 
-const UserProfile = () => {
+const UserProfileEdit = () => {
   const [user, setUser] = useState({
     name: 'Nguyen Thanh Tung',
     phone: '123-456-7890',
     email: 'tungmtp@example.com',
     address: 'Thai Binh',
     profileImageUrl: 'path_to_profile_image.jpg',
-    status: 'Student', // Add the status property
+    status: 'Active', // Add the status property
   });
 
   const [editMode, setEditMode] = useState(false);
@@ -51,14 +51,11 @@ const UserProfile = () => {
             onChange={handleImageChange}
           />
         )}
-       
       </div>
       <div className="user-info">
         <h2>My Profile</h2>
         {editMode ? (
-            
           <form>
-             <br />
             <label>
               Name:
               <input
@@ -99,7 +96,6 @@ const UserProfile = () => {
               />
             </label>
             <br />
-        
             <label>
               Status:
               <input
@@ -122,7 +118,7 @@ const UserProfile = () => {
             <p>
               <strong>Phone:</strong> {user.phone}
             </p>
-<p>
+            <p>
               <strong>Email:</strong> {user.email}
             </p>
             <p>
@@ -131,8 +127,6 @@ const UserProfile = () => {
             <p>
               <strong>Status:</strong> {user.status}
             </p>
-            <br />
-            
             <button type="button" onClick={handleEdit}>
               Edit
             </button>
@@ -143,4 +137,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default UserProfileEdit;
