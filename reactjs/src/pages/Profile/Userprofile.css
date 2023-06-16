@@ -1,0 +1,64 @@
+.user-profile-edit {
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    background-color: #1a1a1a;
+    color: #fff;
+  }
+  
+  .profile-image {
+    flex: 1;
+    margin-right: 40px;
+  }
+  
+  .profile-image img {
+    max-width: 200px;
+    border-radius: 50%;
+  }
+  
+  .profile-image input[type="file"] {
+    margin-top: 40px;
+  }
+  
+  .user-info {
+    flex: 2;
+  }
+  
+  .user-info h2 {
+    margin-bottom: 20px;
+  }
+  
+  .user-info form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-info label {
+    margin-bottom: 20px;
+  }
+  
+  .user-info input {
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px;
+  }
+  
+  .user-info p {
+    margin-bottom: 10px;
+    width: 400px;
+  }
+  
+  .user-info button {
+    padding: 10px 20px;
+    background-color: #f4c648;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-info button:hover {
+    background-color: #f4c648;
+  }
