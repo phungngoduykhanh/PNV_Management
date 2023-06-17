@@ -2,10 +2,9 @@ import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faL } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import './Login.css';
 function Login() {
 
     /*----- handle Show/hide password*/
@@ -17,27 +16,20 @@ function Login() {
 
     /*------hadle form login------*/
     const [formData, setFormData] = useState({ email: '', password: ''});
-    const navigate = useNavigate();
-    
-    console.log(formData);
 
-    const handleLogin = async () => {
+    const handleLogin = async (event) => {
+        event.preventDefault();
         try {
-            const response = await axios.get('http://localhost:3000/users', { params: { email: formData.email } });
-            const userData = response.data[0];
-
-            if (userData && userData.password === formData.password) {
-                const { role } = userData;
-
-                if (role === 'admin') {
-                    navigate('/admin');
-                } else {
-                    navigate('/home');
-                    toast.success('Login successful');
-                }
-            } else {
-                toast.error('Invalid email or password');
-            }
+            console.log(formData.email);
+            console.log(formData.password);
+            const response = await axios.post('http://127.0.0.1:8000/api/login', {
+                email: formData.email,
+                password: formData.password,
+              });
+            const token = response.data.data.token;
+            localStorage.setItem('token', token);
+            console.log(token);
+            
             if (rmbAccount) {
                 localStorage.setItem('email', formData.email );
                 localStorage.setItem('password',formData.password );
@@ -47,6 +39,11 @@ function Login() {
                 localStorage.removeItem('password');
                 localStorage.removeItem('checked');
             }
+
+            toast.success('Login success');
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3000/';
+            }, 1500);
         } catch (error) {
             console.error(error);
             toast.error('Login failed. Please try again.');

@@ -1,19 +1,34 @@
-import styles from './Header.module.scss';
-import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Search from '../Search';
 import { faCircleUser, faBell, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import * as getDataUser from '../../../apiServices/getDataUser';
+import axios from 'axios';
+
+//làm giống phần này
+import classNames from 'classnames/bind';
+import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
+
 function Header() {
-  const [currentUser,setCurrentUser]= useState(undefined);
+
+  const [user, setUser] = useState(null);
   useEffect(()=>{
-    const fetchApi = async ()=>{
-        const resultUser = await getDataUser.getDataUser();
-            setCurrentUser(resultUser);
-        }
-    fetchApi();
+    const token = localStorage.getItem('token'); 
+    console.log(token);
+    if (token) {
+      axios
+        .get('http://127.0.0.1:8000/api/user', {
+          headers: {
+            Authorization: `Bearer ${token}`, 
+          },
+        })
+        .then(response => {
+          setUser(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
 },[]);
 
  return (
@@ -21,11 +36,11 @@ function Header() {
   <div className={cx('content')}>
         <Search/>
         <div className={cx('actions')}>
-        { currentUser &&
+        { user &&
             <div className={cx('item-right')}>
               <div className={cx('user-info')}>
-                  <img className={cx('avatar-user')} src={currentUser.img} alt='img-user'/>
-                  <span className={cx('name-user')}>{currentUser.name}</span>
+                  <img className={cx('avatar-user')} src={user.img} alt='img-user'/>
+                  <span className={cx('name-user')}>{user.name}</span>
               </div>
               <div className={cx('icon')}>
                   <a href='/Notification'>
@@ -37,7 +52,7 @@ function Header() {
               </div>
             </div>
         }
-        { currentUser === false &&
+        { user === false &&
             <>
               <button>
                 <a href={'http://localhost:3000/login'} >
