@@ -76,30 +76,37 @@ function CreateClass() {
         }
     };
 
+
     const handleCreateClass = async () => {
         // Prepare the data for the new class
         const className = document.getElementById('class-name-input').value;
-        const newClass = {
-            className,
-            students: selectedStudents.map((student) => ({
-                studentId: student.id,
-                studentEmail: student.email,
-            })),
-            teachers: selectedTeachers.map((teacher) => ({
-                teacherId: teacher.id,
-                teacherName: teacher.email,
-            })),
-        };
 
         try {
-            // Send a GET request to check if the className already exists
-            const response = await axios.get(`http://localhost:3000/classes?className=${className}`);
-            const existingClass = response.data.find((cls) => cls.className === className);
+            // Send a GET request to retrieve the existing classes
+            const response = await axios.get('http://localhost:3000/classes');
+            const existingClasses = response.data;
 
+            // Find the maximum class_id among the existing classes
+            const maxClassId = existingClasses.length > 0 ? Math.max(...existingClasses.map((cls) => Number(cls.class_id))) : 0;
+
+            // Generate the new class_id by incrementing the maximum value
+            const classId = maxClassId + 1;
+
+            // Prepare the data for the new class
+            const newClass = {
+                class_id: classId,
+                className: className,
+                teacher_emails: selectedTeachers.map((teacher) => teacher.email),
+                student_emails: selectedStudents.map((student) => student.email),
+            };
+
+            // Check if the className already exists
+            const existingClass = existingClasses.find((cls) => cls.className === className);
+          
             if (existingClass) {
                 console.error('Class name already exists:', className);
-                // Display an error message or take appropriate action
                 alert('Class name already exists. Please choose a different name.');
+                window.location.href = 'http://localhost:3001/#open-modal';
                 return;
             }
 
@@ -114,7 +121,6 @@ function CreateClass() {
             console.error('Error creating class:', error);
         }
     };
-
 
 
     return (
@@ -145,11 +151,12 @@ function CreateClass() {
                         {teacherSearchTerm && teacherSearchResults.length > 0 && (
                             <ul className="dropdown-menu">
                                 {teacherSearchResults.map((user) => (
-                                    <li key={user.id} onClick={() => handleUserSelect(user, 'teacher')}>
-                                        <button>{user.email}</button>
+                                    <li key={user.id}>
+                                        <button onClick={() => handleUserSelect(user, 'teacher')}>{user.email}</button>
                                     </li>
                                 ))}
                             </ul>
+
                         )}
                     </div>
 
@@ -163,11 +170,12 @@ function CreateClass() {
                         {studentSearchTerm && studentSearchResults.length > 0 && (
                             <ul className="dropdown-menu">
                                 {studentSearchResults.map((user) => (
-                                    <li key={user.id} onClick={() => handleUserSelect(user, 'student')}>
-                                        <button>{user.email}</button>
+                                    <li key={user.id}>
+                                        <button onClick={() => handleUserSelect(user, 'student')}>{user.email}</button>
                                     </li>
                                 ))}
                             </ul>
+
                         )}
                     </div>
                     <div className="modal-window__button">
