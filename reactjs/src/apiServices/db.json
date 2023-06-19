@@ -3,8 +3,8 @@
     {
       "id": 1,
       "email": "hoty@123.com",
-      "password":"12345",
-      "role": "user"
+      "password": "12345",
+      "role": "teacher"
     },
     {
       "id": 2,
@@ -15,8 +15,112 @@
     {
       "id": 3,
       "email": "khanhphung@123.com",
-      "password":"12345",
-      "role": "user"
+      "password": "12345",
+      "role": "teacher"
+    },
+    {
+      "id": 4,
+      "email": "hieunguye@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 5,
+      "email": "quandang@123.com",
+      "password": "12345",
+      "role": "student"
+    }
+  ],
+  "classes": [
+    {
+      "id": "1",
+      "class_id": 1,
+      "className": "PNV 24A",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ]
+    },
+    {
+      "id": "2",
+      "class_id": 2,
+      "className": "PNV 24B",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ]
+    },
+    {
+      "id": "3",
+      "class_id": 3,
+      "className": "PNV 25A",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ]
+    },
+    {
+      "id": "4",
+      "class_id": 3,
+      "className": "PNV 25B",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ]
+    },
+    {
+      "id": "5",
+      "class_id": 3,
+      "className": "PNV 26A",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ]
+    },
+    {
+      "id": "6",
+      "class_id": 3,
+      "className": "PNV 26B",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ]
     }
   ]
 }
