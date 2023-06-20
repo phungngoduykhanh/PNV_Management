@@ -19,11 +19,33 @@
     display: flex;
     // grid-template-columns: 1fr 1fr 1fr 1fr ;
     // gap: 30px;
+    cursor: pointer;
     .user-info{
         display:flex;
         margin: 0 10px;
+        .dropdown-menu{
+            position: absolute;
+            top: 80px;
+            right: 150px;
+            background-color: #FFFFFF;
+            border: 1px solid ;
+            list-style-type: none;
+            border-radius: 3px;
+            padding: 0;
+            cursor: pointer;
+            li{
+                padding: 15px 35px;
+                &:hover{
+                    background-color: black;
+                    color: white;
+                    user-select: none;
+                }
+            }
+        }
         .avatar-user{
             width: 53px;
+            height: 49px;
+            object-fit: cover;
             border-radius: 50%;
             margin-right: 15px;
         }
@@ -57,6 +79,25 @@
                 color: black;
             }
 
+    }
+
+    .button-signin{
+        background-color: white;
+        border: 1px solid black;
+        width: 170px;
+        a{
+            color: black;
+            text-decoration: none;
+            svg{
+                margin-right: 7px;
+            }
+        }
+        &:hover{
+            background-color: black;
+            a{
+                color: white;
+            }
+        }
     }
 }
 

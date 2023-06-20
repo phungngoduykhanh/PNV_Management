@@ -19,9 +19,16 @@ function Login() {
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        if (rmbAccount) {
+            localStorage.setItem('email', formData.email );
+            localStorage.setItem('password',formData.password );
+            localStorage.setItem('checked', rmbAccount);
+        }else{
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            localStorage.removeItem('checked');
+        }
         try {
-            console.log(formData.email);
-            console.log(formData.password);
             const response = await axios.post('http://127.0.0.1:8000/api/login', {
                 email: formData.email,
                 password: formData.password,
@@ -29,21 +36,11 @@ function Login() {
             const token = response.data.data.token;
             localStorage.setItem('token', token);
             console.log(token);
-            
-            if (rmbAccount) {
-                localStorage.setItem('email', formData.email );
-                localStorage.setItem('password',formData.password );
-                localStorage.setItem('checked', rmbAccount);
-            }else{
-                localStorage.removeItem('email');
-                localStorage.removeItem('password');
-                localStorage.removeItem('checked');
-            }
 
             toast.success('Login success');
             setTimeout(() => {
                 window.location.href = 'http://localhost:3000/';
-            }, 1500);
+            }, 2000);
         } catch (error) {
             console.error(error);
             toast.error('Login failed. Please try again.');
@@ -120,7 +117,7 @@ function Login() {
                     <div className="login-forgot">Forgot password?</div>
                 </div>
                 <div className="login-signup">
-                    Don't have an account? <a href="#">Register</a>
+                    Don't have an account? <a href="http://localhost:3000/register">Register</a>
                 </div>
             </div>
             <ToastContainer />

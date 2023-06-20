@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Search from '../Search';
 import { faCircleUser, faBell, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useContext,useState  } from 'react';
+import {AuthContext} from "../../../components/AuthContext";
 import axios from 'axios';
 
 //làm giống phần này
@@ -11,7 +12,21 @@ const cx = classNames.bind(styles);
 
 function Header() {
 
-  const [user, setUser] = useState(null);
+  const {user,setUser} = useContext(AuthContext);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setTimeout(() => {
+      window.location.reload(false)
+    }, 2000);
+  };
+
   useEffect(()=>{
     const token = localStorage.getItem('token'); 
     console.log(token);
@@ -36,11 +51,17 @@ function Header() {
   <div className={cx('content')}>
         <Search/>
         <div className={cx('actions')}>
-        { user &&
+        { user ?(
             <div className={cx('item-right')}>
               <div className={cx('user-info')}>
-                  <img className={cx('avatar-user')} src={user.img} alt='img-user'/>
-                  <span className={cx('name-user')}>{user.name}</span>
+                  <img className={cx('avatar-user')} src={user.img} alt='img-user' onClick={handleDropdownToggle}/>
+                  <span className={cx('name-user')} onClick={handleDropdownToggle}>{user.name}</span>
+                  {isDropdownOpen && (
+                    <ul className={cx('dropdown-menu')}>
+                      <li>Profile</li>
+                      <li onClick={handleLogout}>Logout</li>
+                    </ul>
+                  )}
               </div>
               <div className={cx('icon')}>
                   <a href='/Notification'>
@@ -51,18 +72,16 @@ function Header() {
                   </a>
               </div>
             </div>
-        }
-        { user === false &&
-            <>
-              <button>
+        ):(
+            <div className={cx('item-right')}>
+              <button className={cx('button-signin')}>
                 <a href={'http://localhost:3000/login'} >
                   <FontAwesomeIcon icon={faCircleUser} />
                     SIGN IN
                 </a>
               </button>
-            
-         </>
-        }
+            </div>
+        )}
     </div>
 </div>  
 </header>
