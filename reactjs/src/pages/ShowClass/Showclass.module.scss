@@ -1,0 +1,78 @@
+.Home-teachers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container-class {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    position: fixed;
+    top: 60%;
+    left: 60%;
+    width: 70%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+
+    
+    .card-class {
+      width: 100%;
+      position: relative;
+      background-color: #fff;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      flex-basis: calc(33.33% - 2rem);
+
+      .class-header {
+        background-color: rgba(53, 166, 242, 1);
+        color: #fff;
+        padding: 20px;
+        font-size: 18px;
+        position: relative;
+
+        img {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          border-radius: 1px;
+        }
+
+        span {
+          padding: 10px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 70px;
+        }
+      }
+
+      .class-body {
+        padding: 50px;
+
+        a {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          padding: 10px;
+          color: rgba(56, 56, 57, 0.97);
+          width: 30px;
+          height: 30px;
+        }
+
+        .class-icon {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+        }
+      }
+                &:hover {
+                        transition: all 0.2s ease-out;
+                        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+                        top: -4px;
+                        background-color: white;
+                }
+    }
+  }
+}
