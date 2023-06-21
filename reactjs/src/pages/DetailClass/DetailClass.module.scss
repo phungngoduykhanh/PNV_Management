@@ -1,0 +1,101 @@
+.container-student {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  position: fixed;
+  top: 60%;
+  left: 60%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.card-student {
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  background-color: rgba(53, 166, 242, 1);
+  margin: 10px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+  border: 2px solid rgba(7, 7, 7, 0.12);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  position: relative;
+
+  .student-header {
+    position: absolute;
+    top: 0px;
+    display: flex;
+    align-self: self-end;
+    color: white;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .student-body {
+    img {
+      margin: 10px auto;
+      width: 80px;
+      height: 80px;
+      max-width: 80px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      transition: all 0.8s ease;
+      background-position: 0px;
+      background-size: 200px;
+      object-fit: cover;
+    }
+
+    .student-title {
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: pre-line;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .student-footer {
+    display: flex;
+    gap: 20px;
+
+    .student-message,
+    .student-view {
+      color: white;
+      width: 60px;
+      height: 17px;
+      background-color: rgba(255, 165, 0, 1);
+      padding: 5px;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 30px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(47, 233, 99, 1);
+      }
+    }
+  }
+}

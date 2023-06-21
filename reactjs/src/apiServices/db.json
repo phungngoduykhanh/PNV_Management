@@ -2,35 +2,62 @@
   "users": [
     {
       "id": 1,
+      "user_name":"Ho Xuan Ty",
       "email": "hoty@123.com",
       "password": "12345",
       "role": "teacher"
     },
     {
       "id": 2,
+      "user_name": "Ho Xuan Ty",
       "email": "admin@123.com",
       "password": "12345",
       "role": "admin"
     },
     {
       "id": 3,
+      "user_name": "Ho Xuan Khanh",
       "email": "khanhphung@123.com",
       "password": "12345",
       "role": "teacher"
     },
     {
       "id": 4,
+      "user_name": "Ho Xuan Hieu",
       "email": "hieunguye@123.com",
       "password": "12345",
       "role": "student"
     },
     {
       "id": 5,
+      "user_name": "Ho Xuan Quan",
       "email": "quandang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 6,
+      "user_name": "Ho Xuan Hoang",
+      "email": "hoang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 6,
+      "user_name": "Ho Xuan Hoang",
+      "email": "hoang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+     {
+      "id": 6,
+      "user_name": "Phung ngo duy khanh",
+      "email": "hoang@123.com",
       "password": "12345",
       "role": "student"
     }
   ],
+  
   "classes": [
     {
       "id": "1",
@@ -42,9 +69,9 @@
         "teacher3@example.com"
       ],
       "student_emails": [
-        "student1@example.com",
-        "student2@example.com",
-        "student3@example.com"
+        "quandang@123.com",
+        "hoang@123.com",
+        "hieunguye@123.com"
       ]
     },
     {

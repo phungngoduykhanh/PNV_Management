@@ -5,7 +5,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 library.add(faCog);
 
 import classNames from 'classnames/bind';
-import styles from './Showclass.module.scss'; 
+import styles from './Showclass.module.scss';
 const cx = classNames.bind(styles);
 
 function ShowClass() {
@@ -28,17 +28,15 @@ function ShowClass() {
     }, []);
 
     const handleCardClick = (classId) => {
-        // Chuyển hướng khi người dùng nhấp vào card
-        window.location.href = `http://example/class/${classId}`;
+        // Chuyển hướng khi người dùng nhấp vào detail class
+        window.location.href = `http://localhost:3001/detailclass/${classId}`;
     };
-
 
     return (
         <div className={cx('container-class')}>
             {classes.map(classData => (
                 <div className={cx('card-class')} key={classData.classId}
-                    onClick={()=> handleCardClick(classData.classId)}
-
+                    onClick={() => handleCardClick(classData.classId)}
                 >
                     <div className={cx('class-header')}>
                         <img src='https://assets-prd.ignimgs.com/2022/08/01/cameron-crovetti-1659376185203.jpg' alt='#' />
@@ -50,7 +48,7 @@ function ShowClass() {
                 </div>
             ))}
         </div>
-);
+    );
 }
 
 export default ShowClass;
