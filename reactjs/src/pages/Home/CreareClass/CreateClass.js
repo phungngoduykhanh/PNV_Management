@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import classNames from 'classnames/bind';
+import styles from './CreateClass.module.scss';
+const cx = classNames.bind(styles);
+
 function CreateClass() {
     const [teacherSearchTerm, setTeacherSearchTerm] = useState('');
     const [studentSearchTerm, setStudentSearchTerm] = useState('');
@@ -8,6 +12,7 @@ function CreateClass() {
     const [studentSearchResults, setStudentSearchResults] = useState([]);
     const [selectedTeachers, setSelectedTeachers] = useState([]);
     const [selectedStudents, setSelectedStudents] = useState([]);
+
 
     const fetchUsers = async (term) => {
         try {
@@ -76,13 +81,22 @@ function CreateClass() {
         }
     };
 
+    const handleRemoveUser = (user, role) => {
+        if (role === 'teacher') {
+            const updatedTeachers = selectedTeachers.filter((teacher) => teacher.id !== user.id);
+            setSelectedTeachers(updatedTeachers);
+        } else if (role === 'student') {
+            const updatedStudents = selectedStudents.filter((student) => student.id !== user.id);
+            setSelectedStudents(updatedStudents);
+        }
+    };
+    console.log(handleRemoveUser);
+
 
     const handleCreateClass = async () => {
-        // Prepare the data for the new class
         const className = document.getElementById('class-name-input').value;
 
         try {
-            // Send a GET request to retrieve the existing classes
             const response = await axios.get('http://localhost:3000/classes');
             const existingClasses = response.data;
 
@@ -125,23 +139,23 @@ function CreateClass() {
 
     return (
         <div>
-            <div className="container-modal">
-                <div className="container__interior">
-                    <a className="btn" href="#open-modal">
+            <div className={cx("container-modal")}>
+                <div className={cx("container__interior")}>
+                    <a className={cx("btn")} href={cx("#open-modal")}>
                         <span>
-                            <i className="fa-solid fa-plus" />
+                            <i className={cx("fa-solid fa-plus")} />
                         </span>
                         Add class
                     </a>
                 </div>
             </div>
-            <div id="open-modal" className="modal-window">
-                <div className="modal-window__content">
-                    <h1 className="modal-window__title">Create class</h1>
-                    <div className="modal-window__input">
+            <div id={cx("open-modal")} className={cx("modal-window")}>
+                <div className={cx("modal-window__content")}>
+                    <h1 className={cx("modal-window__title")}>Create class</h1>
+                    <div className={cx("modal-window__input")}>
                         <input type="text" id="class-name-input" placeholder="Class name (required)" />
                     </div>
-                    <div className="modal-window__input">
+                    <div className={cx("modal-window__input")}>
                         <input
                             type="text"
                             placeholder="Add Teacher"
@@ -149,18 +163,27 @@ function CreateClass() {
                             onChange={handleTeacherSearchTermChange}
                         />
                         {teacherSearchTerm && teacherSearchResults.length > 0 && (
-                            <ul className="dropdown-menu">
+                            <ul className={cx("dropdown-menu")}>
                                 {teacherSearchResults.map((user) => (
                                     <li key={user.id}>
                                         <button onClick={() => handleUserSelect(user, 'teacher')}>{user.email}</button>
                                     </li>
                                 ))}
                             </ul>
-
                         )}
+                        <div className={cx('selected')}>
+                            <ul className={cx('selected-results')}>
+                                {selectedTeachers.map((teacher) => (
+                                    <li className={cx('selected-results_email')} key={teacher.id}>
+                                        <span>{teacher.email}</span>
+                                        <button onClick={() => handleRemoveUser(teacher, 'teacher')}>X</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className="modal-window__input">
+                    <div className={cx("modal-window__input")}>
                         <input
                             type="text"
                             placeholder="Add Student"
@@ -168,7 +191,7 @@ function CreateClass() {
                             onChange={handleStudentSearchTermChange}
                         />
                         {studentSearchTerm && studentSearchResults.length > 0 && (
-                            <ul className="dropdown-menu">
+                            <ul className={cx("dropdown-menu")}>
                                 {studentSearchResults.map((user) => (
                                     <li key={user.id}>
                                         <button onClick={() => handleUserSelect(user, 'student')}>{user.email}</button>
@@ -177,12 +200,23 @@ function CreateClass() {
                             </ul>
 
                         )}
+                        <div className={cx('selected')}>
+                            <ul className={cx('selected-results')}>
+                                {selectedStudents.map((student) => (
+                                    <li key={student.id}>
+                                        <span>{student.email}</span>
+                                        <button onClick={() => handleRemoveUser(student, 'student')}>X</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
                     </div>
-                    <div className="modal-window__button">
-                        <a href="#" className="modal-window__close">
+                    <div className={cx("modal-window__button")}>
+                        <a href="#" className={cx("modal-window__close")}>
                             Cancel
                         </a>
-                        <a href="#" className="modal-window__create" onClick={handleCreateClass}>
+                        <a className={cx("modal-window__create")} onClick={handleCreateClass}>
                             Create
                         </a>
                     </div>

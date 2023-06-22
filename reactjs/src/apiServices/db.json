@@ -29,6 +29,24 @@
       "email": "quandang@123.com",
       "password": "12345",
       "role": "student"
+    },
+    {
+      "id": 6,
+      "email": "xuan@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 7,
+      "email": "thang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 8,
+      "email": "hoang@123.com",
+      "password": "12345",
+      "role": "student"
     }
   ],
   "classes": [
@@ -48,34 +66,27 @@
       ]
     },
     {
-      "id": "2",
       "class_id": 2,
-      "className": "PNV 24B",
-      "teacher_emails": [
-        "teacher1@example.com",
-        "teacher2@example.com",
-        "teacher3@example.com"
-      ],
-      "student_emails": [
-        "student1@example.com",
-        "student2@example.com",
-        "student3@example.com"
-      ]
+      "className": "",
+      "teacher_emails": [],
+      "student_emails": [],
+      "id": "jwG24F0"
     },
     {
-      "id": "3",
       "class_id": 3,
-      "className": "PNV 24C",
+      "className": "PNV 24B",
       "teacher_emails": [
-        "teacher1@example.com",
-        "teacher2@example.com",
-        "teacher3@example.com"
+        "hoty@123.com",
+        "khanhphung@123.com"
       ],
       "student_emails": [
-        "student1@example.com",
-        "student2@example.com",
-        "student3@example.com"
-      ]
+        "hieunguye@123.com",
+        "quandang@123.com",
+        "xuan@123.com",
+        "thang@123.com",
+        "hoang@123.com"
+      ],
+      "id": "Osa_nxC"
     }
   ]
 }

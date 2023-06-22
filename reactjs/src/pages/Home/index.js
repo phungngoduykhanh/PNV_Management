@@ -1,5 +1,4 @@
 import CreateClass from "./CreareClass/CreateClass";
-import './CreareClass/CreateClass.css';
 
 
 function Home() {
