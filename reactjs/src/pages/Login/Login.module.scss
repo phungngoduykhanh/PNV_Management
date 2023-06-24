@@ -2,10 +2,8 @@
 /*------Login CSS-------*/
 
 .container{
-  max-width:50%;
-  margin:auto;
   text-align:center;
-  margin-top: 50px;
+  width: 500px;
 }
 .container *{
   box-sizing:border-box;
@@ -38,12 +36,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-   position: absolute;
+  position: absolute;
   top: 10px;
   right: 10px;
 }
 
 .login-form .login-title{
+  cursor: pointer;
   font-size:38px;
   font-weight:300;
   margin:0px 0px 45px 0px;
@@ -89,6 +88,7 @@
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  color: white;
 }
 
 
@@ -103,13 +103,16 @@
   text-decoration:underline;
   font-size:14px;
   color:rgba(255, 255, 255, 1)  ;
+  cursor: pointer;
 }
 
 .login-signup{
   color:#FFF;
   margin:20px 0px;
 }
-
+.fa-envelope{
+  color: white;
+}
 .login-signup a{
   color:#FFF;
   font-weight:600;

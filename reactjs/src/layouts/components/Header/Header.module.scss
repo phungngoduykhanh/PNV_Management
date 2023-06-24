@@ -34,11 +34,18 @@
             padding: 0;
             cursor: pointer;
             li{
+                a{
+                    text-decoration: none;
+                    color: black;
+                }
                 padding: 15px 35px;
                 &:hover{
                     background-color: black;
                     color: white;
                     user-select: none;
+                    a{
+                        color: white;
+                    }
                 }
             }
         }

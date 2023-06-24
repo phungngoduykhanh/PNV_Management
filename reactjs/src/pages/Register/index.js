@@ -1,11 +1,14 @@
-import './Register.css';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser,faLock,faEnvelope,faLockOpen } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock, faEnvelope, faLockOpen, faTimesCircle, faCheckToSlot } from '@fortawesome/free-solid-svg-icons';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import classNames from 'classnames/bind';
+import styles from './Register.module.scss';
+
+const cx = classNames.bind(styles);
 
 function Register() {
   const [exists, setExists] = useState({});
@@ -13,7 +16,7 @@ function Register() {
     username: '',
     email: '',
     password: '',
-    confirmpassword : '', 
+    confirmpassword: '',
   });
 
   const handleChange = (event) => {
@@ -25,6 +28,18 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Kiểm tra mật khẩu có ít nhất 6 ký tự
+    if (formData.password.length < 6) {
+      toast.error('Mật khẩu phải có ít nhất 6 ký tự');
+      return;
+    }
+    // Kiểm tra định dạng email có đuôi @gmail.com
+    const emailRegex = /^[A-Z0-9._%+-]+@gmail\.com$/i;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Định dạng email không hợp lệ. Email phải có đuôi @gmail.com');
+      return;
+    }
 
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/check-user', {
@@ -40,13 +55,12 @@ function Register() {
       } else {
         console.log('Tiếp tục xử lý đăng ký');
         const response = await axios.post('http://127.0.0.1:8000/api/register', {
-            username: formData.username,
-            email: formData.email,
-            password:formData.password
-          });
-        if (response.data.code ===201) {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        });
+        if (response.data.code === 201) {
           toast.success('Đăng ký thành công!');
-          
         } else {
           toast.error('Đăng ký thất bại. Vui lòng thử lại.');
         }
@@ -58,76 +72,77 @@ function Register() {
   };
 
   return (
-    <div className="container my-3 py-3">
-      <h1 className="text-center">Registration</h1>
-      <div className="row my-4 h-100">
-        <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+    <div className={cx('container', 'my-3', 'py-3')}>
+      <h1 className={cx('text-center')}>Registration</h1>
+      <div className={cx('aTimesCircle')}>
+        <FontAwesomeIcon icon={faTimesCircle} style={{ color: '#ffffff' }} />
+      </div>
+      <div className={cx('row', 'my-4', 'h-100')}>
+        <div className={cx('col-md-4', 'col-lg-4', 'col-sm-8', 'mx-auto')}>
           <form onSubmit={handleSubmit}>
-            <div className="form my-3">
+            <div className={cx('form', 'my-3')}>
               <input
                 type="text"
-                className="form-control"
+                className={cx('form-control')}
                 id="Name"
                 name="username"
-                placeholder="User Name" 
+                placeholder="User Name"
                 value={formData.username}
                 onChange={handleChange}
               />
-              <FontAwesomeIcon icon={faUser } style={{ color: '#ffffff'  }} className="custom-icon" />
+              <FontAwesomeIcon icon={faUser} style={{ color: '#ffffff' }} className={cx('custom-icon')} />
             </div>
-            <div className="form my-3">
-              <span className="input-icon">
-                <i className="fas fa-envelope"></i>
-              </span>
+            <div className={cx('form', 'my-3')}>
               <input
                 type="email"
-                className="form-control"
+                className={cx('form-control')}
                 id="Email"
                 name="email"
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
               />
-              <FontAwesomeIcon icon={faEnvelope } style={{ color: '#ffffff' }} className="custom-icon" />
+              <FontAwesomeIcon icon={faEnvelope} style={{ color: '#ffffff' }} className={cx('custom-icon')} />
             </div>
-            <div className="form my-3">
+            <div className={cx('form', 'my-3')}>
               <input
                 type="password"
-                className="form-control"
+                className={cx('form-control')}
                 id="Password"
                 name="password"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
               />
-              <FontAwesomeIcon icon={faLock} style={{ color: '#ffffff' }} className="custom-icon" />
+              <FontAwesomeIcon icon={faLock} style={{ color: '#ffffff' }} className={cx('custom-icon')} />
             </div>
-            <div className="form my-3">
+            <div className={cx('form', 'my-3')}>
               <input
                 type="password"
-                className="form-control"
+                className={cx('form-control')}
                 id="ConfirmPassword"
                 name="confirmpassword"
                 placeholder="Confirm Password"
                 value={formData.confirmpassword}
                 onChange={handleChange}
               />
-        
-              <FontAwesomeIcon icon={faLockOpen}style={{ color: '#ffffff' }} className="custom-icon"  />
+              <FontAwesomeIcon icon={faLockOpen} style={{ color: '#ffffff' }} className={cx('custom-icon')} />
             </div>
-            <div className="">
+            <div className={cx('')}>
               <p>
-                <i className="far fa-check-square ml-2"></i> I agree to the terms & conditions
+                <FontAwesomeIcon icon={faCheckToSlot} style={{ color: '#35A6F2' }} className={cx('aCheckToSlot')} />
+                <div>I agree to the terms & conditions</div>
               </p>
             </div>
-            <div className="text-center">
-              <button className="my-2 mx-auto btn btn-dark" type="submit" >
+
+            <div className={cx('')}>
+              <button className={cx('my-2', 'mx-auto', 'btn', 'btn-dark')} type="submit">
                 Register
               </button>
             </div>
-            <div className="my-3">
+            <div className={cx('my-3')}>
               <p>
-                Already have an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link>
+                Already have an account? <Link to="/login" className={cx('text-decoration-underline', 'text-info')}>Login</Link>
               </p>
             </div>
           </form>
@@ -136,7 +151,6 @@ function Register() {
       <ToastContainer />
     </div>
   );
-    
 }
 
 export default Register;

@@ -24,28 +24,25 @@ function Header() {
     localStorage.removeItem('token');
     setTimeout(() => {
       window.location.reload(false)
-    }, 2000);
+    }, 1500);
   };
-
-  useEffect(()=>{
-    const token = localStorage.getItem('token'); 
-    console.log(token);
-    if (token) {
-      axios
-        .get('http://127.0.0.1:8000/api/user', {
-          headers: {
-            Authorization: `Bearer ${token}`, 
-          },
-        })
-        .then(response => {
-          setUser(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
-},[]);
-
+    useEffect(()=>{
+      const token = localStorage.getItem('token'); 
+      console.log(token);
+      if (token) {
+        axios.get('http://127.0.0.1:8000/api/user', {
+            headers: {
+              Authorization: `Bearer ${token}`, 
+            },
+          })
+          .then(response => {
+            setUser(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+  },[]);
  return (
  <header className={cx('wrapper')}>
   <div className={cx('content')}>
@@ -58,7 +55,7 @@ function Header() {
                   <span className={cx('name-user')} onClick={handleDropdownToggle}>{user.name}</span>
                   {isDropdownOpen && (
                     <ul className={cx('dropdown-menu')}>
-                      <li>Profile</li>
+                      <li><a href='http://localhost:3000/user'>Profile</a></li>
                       <li onClick={handleLogout}>Logout</li>
                     </ul>
                   )}

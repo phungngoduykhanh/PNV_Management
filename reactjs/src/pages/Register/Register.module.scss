@@ -1,20 +1,25 @@
 
 .container{
     background-color: black;
-    width: 500px;
-    height: auto;
+    width: 700px;
+    height: 600px;
     text-align: center;
-    margin: auto;
     border: 2px rgba(225,255 , 255, .5);
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0,0,0,.5);
-   display: l=flex;
+   display: flex;
    justify-content: center;
    align-items: center;
+
   }
   .text-center{
     color: white;
+    position: relative;
+    top: 40px;
+    right: 4px;
+    text-align: center;
+    font-size: 40px;
   }
  .form input{
   margin: 10px auto;
@@ -26,22 +31,31 @@
   border: none;
   border-bottom: 5px solid rgba(255, 255, 255, 1);
   outline: none;
-  width: 280px;
+  width: 330px;
   
-
  }
+ .submit{
+    color: white;
+    position: relative;
+    top: 10px;
+}
+ 
  .my-3{
     color: white;
+    position: relative;
+    top: 10px;
 }
 button{
     background-color: #35A6F2;
-    width: 280px;
+    width: 300px;
     height: 40px;
-    top: 8px;
-    left: 389px;
+    top: 10px;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 8px;
+    position: relative;
+    right: 16px;
+
 }
 i {
     color: #35A6F2;
@@ -53,3 +67,23 @@ i {
     right: 30px;
     /* Các thuộc tính CSS khác */
   }
+  .aTimesCircle{
+    color: #ffffff;
+    font-size: 35px;
+    position: relative;
+    left: 270px;
+    bottom: 40px;
+    font-size: 24px;
+  }
+  .aCheckToSlot{
+    font-size: 35px;
+    position: relative;
+    right: 150px;
+    bottom: -20px;
+    font-size: 24px;
+    
+  }
+.fa-check-square {
+    position:relative ;
+    
+}
