@@ -82,10 +82,6 @@
         }
       }
 
-      // &:not(:last-of-type) {
-      //   margin-top: 20px;
-      // }
-
       .selected {
         .selected-results {
           display: flex;
@@ -122,6 +118,12 @@
             }
           }
         }
+      }
+
+      .error-message{
+        font-size: 13px;
+        padding: 5px 5px 0px 5px;
+        color: red;
       }
     }
 

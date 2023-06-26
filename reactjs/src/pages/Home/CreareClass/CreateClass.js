@@ -16,6 +16,8 @@ function CreateClass() {
     const [selectedTeachers, setSelectedTeachers] = useState([]);
     const [selectedStudents, setSelectedStudents] = useState([]);
     const [isInputValid, setIsInputValid] = useState(false);
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const [roomName, setRoomName] = useState('');
 
 
     const fetchUsers = async (term) => {
@@ -47,13 +49,13 @@ function CreateClass() {
     }, [selectedTeachers, selectedStaff, selectedStudents, teacherSearchTerm, staffSearchTerm, studentSearchTerm]);
 
     const checkInputValidity = () => {
-        const classNameInput = document.getElementById('class-name-input');
-        const isClassNameValid = classNameInput.value.trim() !== '';
+        const roomNameInput = document.getElementById('class-name-input');
+        const isroomNameValid = roomNameInput.value.trim() !== '';
         const isTeachersSelected = selectedTeachers.length > 0;
         const isStaffSelected = selectedStaff.length > 0;
         const isStudentsSelected = selectedStudents.length > 0;
 
-        setIsInputValid(isClassNameValid && isTeachersSelected && isStaffSelected && isStudentsSelected);
+        setIsInputValid(isroomNameValid && isTeachersSelected && isStaffSelected && isStudentsSelected);
     };
 
 
@@ -141,13 +143,16 @@ function CreateClass() {
 
 
     const handleCreateClass = async () => {
-        const className = document.getElementById('class-name-input').value;
+        const roomName = document.getElementById('class-name-input').value;
 
+        //-----Verification input value-----
         if (!isInputValid) {
-            alert('Please fill in all the required fields.');
+            setIsInputValid(false);
+            setIsFormSubmitted(true);
             return;
-        }
+        }   
 
+        //---------------
         try {
             const response = await axios.get('http://localhost:3000/classes');
             const existingClasses = response.data;
@@ -161,17 +166,17 @@ function CreateClass() {
             // Prepare the data for the new class
             const newClass = {
                 class_id: classId,
-                className: className,
+                roomName: roomName,
                 teacher_emails: selectedTeachers.map((teacher) => teacher.email),
                 student_emails: selectedStudents.map((student) => student.email),
                 staff_emails: selectedStaff.map((staff) => staff.email)
             };
 
             // Check if the className already exists
-            const existingClass = existingClasses.find((cls) => cls.className === className);
+            const existingClass = existingClasses.find((cls) => cls.roomName === roomName);
 
             if (existingClass) {
-                console.error('Class name already exists:', className);
+                console.error('Class name already exists:', roomName);
                 alert('Class name already exists. Please choose a different name.');
                 window.location.href = 'http://localhost:3001/#open-modal';
                 return;
@@ -185,12 +190,13 @@ function CreateClass() {
             setSelectedTeachers([]);
             setSelectedStudents([]);
             setSelectedStaffs([]);
-            document.getElementById('class-name-input').value = '';
+            setRoomName('');
             setIsInputValid(false);
         } catch (error) {
             console.error('Error creating class:', error);
         }
     };
+
 
     return (
         <div>
@@ -208,8 +214,17 @@ function CreateClass() {
                 <div className={cx("modal-window__content")}>
                     <h1 className={cx("modal-window__title")}>Create Chat Room</h1>
                     <div className={cx("modal-window__input")}>
-                        <input type="text" id="class-name-input"
-                            placeholder="Chat Room name (required)" />
+                        <input
+                            type="text"
+                            id="class-name-input"
+                            placeholder="Class name (required)"
+                            value={roomName}
+                            onChange={(event) => setRoomName(event.target.value)}
+                            style={{ borderColor: isFormSubmitted && !roomName ? "red" : "" }}
+                        />
+                        {isFormSubmitted && !roomName && (
+                            <div className={cx("error-message")}>Please fill in the room name</div>
+                        )}
                     </div>
                     <div className={cx("modal-window__input")}>
                         <input
@@ -218,6 +233,7 @@ function CreateClass() {
                             value={teacherSearchTerm}
                             onChange={handleTeacherSearchTermChange}
                         />
+                        
                         {teacherSearchTerm && teacherSearchResults.length > 0 && (
                             <ul className={cx("dropdown-menu")}>
                                 {teacherSearchResults.map((user) => (

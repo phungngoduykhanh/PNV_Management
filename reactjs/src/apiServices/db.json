@@ -83,7 +83,7 @@
     {
       "id": "1",
       "class_id": 1,
-      "className": "PNV 24A",
+      "roomName": "PNV 24A",
       "teacher_emails": [
         "teacher1@example.com",
         "teacher2@example.com",
@@ -99,34 +99,6 @@
         "staff2@example.com",
         "staff3@example.com"
       ]
-    },
-    {
-      "class_id": 2,
-      "className": "PNV 24B",
-      "teacher_emails": [
-        "khanhphung@123.com"
-      ],
-      "student_emails": [
-        "hieunguye@123.com"
-      ],
-      "staff_emails": [
-        "hoty@123.com"
-      ],
-      "id": "nrSB0q9"
-    },
-    {
-      "class_id": 3,
-      "className": "PNV 25B",
-      "teacher_emails": [
-        "khanhphung@123.com"
-      ],
-      "student_emails": [
-        "hieunguye@123.com"
-      ],
-      "staff_emails": [
-        "hoty@123.com"
-      ],
-      "id": "Pl2BQdq"
     }
   ]
 }
