@@ -19,7 +19,7 @@ function CreateClass() {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [roomName, setRoomName] = useState('');
 
-
+    // connect api to search users
     const fetchUsers = async (term) => {
         try {
             const response = await axios.get(`http://localhost:3000/users?search=${term}`);
@@ -48,6 +48,7 @@ function CreateClass() {
         checkInputValidity();
     }, [selectedTeachers, selectedStaff, selectedStudents, teacherSearchTerm, staffSearchTerm, studentSearchTerm]);
 
+    // handle verify input value
     const checkInputValidity = () => {
         const roomNameInput = document.getElementById('class-name-input');
         const isroomNameValid = roomNameInput.value.trim() !== '';
@@ -58,7 +59,7 @@ function CreateClass() {
         setIsInputValid(isroomNameValid && isTeachersSelected && isStaffSelected && isStudentsSelected);
     };
 
-
+    //handle teachers
     const handleTeacherSearchTermChange = async (event) => {
         const term = event.target.value;
         setTeacherSearchTerm(term);
@@ -78,6 +79,7 @@ function CreateClass() {
         }
     };
 
+    //handle staff
     const handleStaffSearchTermChange = async (event) => {
         const term = event.target.value;
         setStaffSearchTerm(term);
@@ -97,6 +99,7 @@ function CreateClass() {
         }
     }
 
+    //handle student
     const handleStudentSearchTermChange = async (event) => {
         const term = event.target.value;
         setStudentSearchTerm(term);
@@ -115,6 +118,8 @@ function CreateClass() {
             setStudentSearchResults([]);
         }
     };
+
+    // handle choose user when search
     const handleUserSelect = (user, role) => {
         if (role === 'teacher') {
             setSelectedTeachers([...selectedTeachers, user]);
@@ -142,7 +147,8 @@ function CreateClass() {
     };
 
 
-    const handleCreateClass = async () => {
+    // handle create chat room
+    const handleCreateChat = async () => {
         const roomName = document.getElementById('class-name-input').value;
 
         //-----Verification input value-----
@@ -199,6 +205,10 @@ function CreateClass() {
         }
     };
 
+    // Replace with the homepage 
+    const handleCancel = () => {
+        window.location.href = 'http://localhost:3001/'; 
+    };
 
     return (
         <div>
@@ -330,7 +340,7 @@ function CreateClass() {
                     </div>
 
                     <div className={cx("modal-window__button")}>
-                        <a href='#' className={cx("modal-window__close")}>
+                        <a onClick={handleCancel} className={cx("modal-window__close")}>
                             Cancel
                         </a>
        
@@ -340,7 +350,7 @@ function CreateClass() {
                                 backgroundColor: isInputValid ? "rgba(53, 166, 242, 1)" : "",
                                 color: isInputValid ? "white" : ""
                             }}
-                            onClick={handleCreateClass}
+                            onClick={handleCreateChat}
                         >
                             Create
                         </a>

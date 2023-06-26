@@ -113,6 +113,20 @@
         "hoty@123.com"
       ],
       "id": "reE2__e"
+    },
+    {
+      "class_id": 3,
+      "roomName": "PNV 27A",
+      "teacher_emails": [
+        "khanhphung@123.com"
+      ],
+      "student_emails": [
+        "hieunguye@123.com"
+      ],
+      "staff_emails": [
+        "hoty@123.com"
+      ],
+      "id": "iJDGIHt"
     }
   ]
 }
