@@ -8,10 +8,14 @@ const cx = classNames.bind(styles);
 function CreateClass() {
     const [teacherSearchTerm, setTeacherSearchTerm] = useState('');
     const [studentSearchTerm, setStudentSearchTerm] = useState('');
+    const [staffSearchTerm, setStaffSearchTerm] = useState('');
     const [teacherSearchResults, setTeacherSearchResults] = useState([]);
+    const [staffSearchResults, setStaffSearchResults] = useState([]);
     const [studentSearchResults, setStudentSearchResults] = useState([]);
+    const [selectedStaff, setSelectedStaffs] = useState([]);
     const [selectedTeachers, setSelectedTeachers] = useState([]);
     const [selectedStudents, setSelectedStudents] = useState([]);
+    const [isInputValid, setIsInputValid] = useState(false);
 
 
     const fetchUsers = async (term) => {
@@ -31,8 +35,27 @@ function CreateClass() {
     }, [teacherSearchTerm]);
 
     useEffect(() => {
+        setStaffSearchResults([]);
+    }, [staffSearchTerm])
+
+    useEffect(() => {
         setStudentSearchResults([]);
     }, [studentSearchTerm]);
+
+    useEffect(() => {
+        checkInputValidity();
+    }, [selectedTeachers, selectedStaff, selectedStudents, teacherSearchTerm, staffSearchTerm, studentSearchTerm]);
+
+    const checkInputValidity = () => {
+        const classNameInput = document.getElementById('class-name-input');
+        const isClassNameValid = classNameInput.value.trim() !== '';
+        const isTeachersSelected = selectedTeachers.length > 0;
+        const isStaffSelected = selectedStaff.length > 0;
+        const isStudentsSelected = selectedStudents.length > 0;
+
+        setIsInputValid(isClassNameValid && isTeachersSelected && isStaffSelected && isStudentsSelected);
+    };
+
 
     const handleTeacherSearchTermChange = async (event) => {
         const term = event.target.value;
@@ -52,6 +75,25 @@ function CreateClass() {
             setTeacherSearchResults([]);
         }
     };
+
+    const handleStaffSearchTermChange = async (event) => {
+        const term = event.target.value;
+        setStaffSearchTerm(term);
+
+        try {
+            const results = await fetchUsers(term);
+            setStaffSearchResults(
+                results.filter(
+                    (user) =>
+                        !selectedStaff.find((selectedUser) => selectedUser.id === user.id) &&
+                        user.role === 'staff'
+                )
+            )
+        } catch (error) {
+            console.error("Error searching students:", error);
+            setStaffSearchResults([]);
+        }
+    }
 
     const handleStudentSearchTermChange = async (event) => {
         const term = event.target.value;
@@ -78,6 +120,9 @@ function CreateClass() {
         } else if (role === 'student') {
             setSelectedStudents([...selectedStudents, user]);
             setStudentSearchTerm('');
+        } else {
+            setSelectedStaffs([...selectedStaff, user]);
+            setStaffSearchTerm('');
         }
     };
 
@@ -88,13 +133,20 @@ function CreateClass() {
         } else if (role === 'student') {
             const updatedStudents = selectedStudents.filter((student) => student.id !== user.id);
             setSelectedStudents(updatedStudents);
+        } else {
+            const updatedStaffs = selectedStaff.filter((staff) => staff.id !== user.id);
+            setSelectedStaffs(updatedStaffs);
         }
     };
-    console.log(handleRemoveUser);
 
 
     const handleCreateClass = async () => {
         const className = document.getElementById('class-name-input').value;
+
+        if (!isInputValid) {
+            alert('Please fill in all the required fields.');
+            return;
+        }
 
         try {
             const response = await axios.get('http://localhost:3000/classes');
@@ -112,11 +164,12 @@ function CreateClass() {
                 className: className,
                 teacher_emails: selectedTeachers.map((teacher) => teacher.email),
                 student_emails: selectedStudents.map((student) => student.email),
+                staff_emails: selectedStaff.map((staff) => staff.email)
             };
 
             // Check if the className already exists
             const existingClass = existingClasses.find((cls) => cls.className === className);
-          
+
             if (existingClass) {
                 console.error('Class name already exists:', className);
                 alert('Class name already exists. Please choose a different name.');
@@ -131,11 +184,13 @@ function CreateClass() {
             // Reset the selected users state and any other relevant state
             setSelectedTeachers([]);
             setSelectedStudents([]);
+            setSelectedStaffs([]);
+            document.getElementById('class-name-input').value = '';
+            setIsInputValid(false);
         } catch (error) {
             console.error('Error creating class:', error);
         }
     };
-
 
     return (
         <div>
@@ -145,15 +200,16 @@ function CreateClass() {
                         <span>
                             <i className={cx("fa-solid fa-plus")} />
                         </span>
-                        Add class
+                        Add Chat
                     </a>
                 </div>
             </div>
             <div id={cx("open-modal")} className={cx("modal-window")}>
                 <div className={cx("modal-window__content")}>
-                    <h1 className={cx("modal-window__title")}>Create class</h1>
+                    <h1 className={cx("modal-window__title")}>Create Chat Room</h1>
                     <div className={cx("modal-window__input")}>
-                        <input type="text" id="class-name-input" placeholder="Class name (required)" />
+                        <input type="text" id="class-name-input"
+                            placeholder="Chat Room name (required)" />
                     </div>
                     <div className={cx("modal-window__input")}>
                         <input
@@ -182,6 +238,36 @@ function CreateClass() {
                             </ul>
                         </div>
                     </div>
+                    <div className={cx("modal-window__input")}>
+                        <input
+                            type="text"
+                            placeholder="Add Staff"
+                            value={staffSearchTerm}
+                            onChange={handleStaffSearchTermChange}
+                        />
+                        {staffSearchTerm && staffSearchResults.length > 0 && (
+                            <ul className={cx("dropdown-menu")}>
+                                {staffSearchResults.map((user) => (
+                                    <li key={user.id}>
+                                        <button onClick={() => handleUserSelect(user, 'staff')}>{user.email}</button>
+                                    </li>
+                                ))}
+                            </ul>
+
+                        )}
+                        <div className={cx('selected')}>
+                            <ul className={cx('selected-results')}>
+                                {selectedStaff.map((staff) => (
+                                    <li key={staff.id}>
+                                        <span>{staff.email}
+                                        </span>
+                                        <button onClick={() => handleRemoveUser(staff, 'staff')}>X</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                    </div>
 
                     <div className={cx("modal-window__input")}>
                         <input
@@ -204,7 +290,8 @@ function CreateClass() {
                             <ul className={cx('selected-results')}>
                                 {selectedStudents.map((student) => (
                                     <li key={student.id}>
-                                        <span>{student.email}</span>
+                                        <span>{student.email}
+                                        </span>
                                         <button onClick={() => handleRemoveUser(student, 'student')}>X</button>
                                     </li>
                                 ))}
@@ -212,18 +299,29 @@ function CreateClass() {
                         </div>
 
                     </div>
+
                     <div className={cx("modal-window__button")}>
-                        <a href="#" className={cx("modal-window__close")}>
+                        <a href='#' className={cx("modal-window__close")}>
                             Cancel
                         </a>
-                        <a className={cx("modal-window__create")} onClick={handleCreateClass}>
+       
+                        <a
+                            className={cx("modal-window__create")}
+                            style={{
+                                backgroundColor: isInputValid ? "rgba(53, 166, 242, 1)" : "",
+                                color: isInputValid ? "white" : ""
+                            }}
+                            onClick={handleCreateClass}
+                        >
                             Create
                         </a>
+
                     </div>
                 </div>
             </div>
         </div>
     );
-
 }
+
+
 export default CreateClass;

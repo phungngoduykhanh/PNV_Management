@@ -47,6 +47,7 @@ function Login() {
                 localStorage.removeItem('password');
                 localStorage.removeItem('checked');
             }
+            
         } catch (error) {
             console.error(error);
             toast.error('Login failed. Please try again.');
