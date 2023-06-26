@@ -177,7 +177,7 @@ function CreateClass() {
 
             if (existingClass) {
                 console.error('Class name already exists:', roomName);
-                alert('Class name already exists. Please choose a different name.');
+                alert('Room name already exists. Please choose a different name.');
                 window.location.href = 'http://localhost:3001/#open-modal';
                 return;
             }
@@ -185,7 +185,9 @@ function CreateClass() {
             // Send a POST request to create the new class
             const createResponse = await axios.post('http://localhost:3000/classes', newClass);
             console.log('Created class:', createResponse.data);
-
+            if (createResponse) {
+                alert('Create room successful');
+            }
             // Reset the selected users state and any other relevant state
             setSelectedTeachers([]);
             setSelectedStudents([]);
@@ -232,8 +234,11 @@ function CreateClass() {
                             placeholder="Add Teacher"
                             value={teacherSearchTerm}
                             onChange={handleTeacherSearchTermChange}
+                            style={{ borderColor: isFormSubmitted && !teacherSearchTerm && selectedTeachers.length ===0 ? "red" : "" }}
                         />
-                        
+                        {isFormSubmitted && !teacherSearchTerm && selectedTeachers.length === 0 && (
+                            <div className={cx("error-message")}>Please add teacher email</div>
+                        )}
                         {teacherSearchTerm && teacherSearchResults.length > 0 && (
                             <ul className={cx("dropdown-menu")}>
                                 {teacherSearchResults.map((user) => (
@@ -260,7 +265,11 @@ function CreateClass() {
                             placeholder="Add Staff"
                             value={staffSearchTerm}
                             onChange={handleStaffSearchTermChange}
+                            style={{ borderColor: isFormSubmitted && !staffSearchTerm && selectedStaff.length === 0 ? "red" : "" }}
                         />
+                        {isFormSubmitted && !staffSearchTerm && selectedStaff.length === 0 && (
+                            <div className={cx("error-message")}>Please add staff email</div>
+                        )}
                         {staffSearchTerm && staffSearchResults.length > 0 && (
                             <ul className={cx("dropdown-menu")}>
                                 {staffSearchResults.map((user) => (
@@ -291,7 +300,11 @@ function CreateClass() {
                             placeholder="Add Student"
                             value={studentSearchTerm}
                             onChange={handleStudentSearchTermChange}
+                            style={{ borderColor: isFormSubmitted && !studentSearchTerm && selectedStudents.length === 0 ? "red" : "" }}
                         />
+                        {isFormSubmitted && !studentSearchTerm && selectedStudents.length === 0 && (
+                            <div className={cx("error-message")}>Please add student email</div>
+                        )}
                         {studentSearchTerm && studentSearchResults.length > 0 && (
                             <ul className={cx("dropdown-menu")}>
                                 {studentSearchResults.map((user) => (
