@@ -146,7 +146,6 @@ function CreateClass() {
         }
     };
 
-
     // handle create chat room
     const handleCreateChat = async () => {
         const roomName = document.getElementById('class-name-input').value;
@@ -156,12 +155,27 @@ function CreateClass() {
             setIsInputValid(false);
             setIsFormSubmitted(true);
             return;
-        }   
+        }
 
-        //---------------
+        // Check if the room name is empty
+        if (!roomName) {
+            setIsFormSubmitted(true);
+            return;
+        }
+
         try {
+            // Fetch the latest existingClasses data
             const response = await axios.get('http://localhost:3000/classes');
             const existingClasses = response.data;
+
+            // Check if the roomName already exists
+            const existingClass = existingClasses.find((cls) => cls.roomName === roomName);
+
+            if (existingClass) {
+                document.getElementById('class-name-input').style.borderColor = "red";
+                document.getElementById('class-name-error').innerText = 'Room name already exists. Please choose a different name.';
+                return;
+            }
 
             // Find the maximum class_id among the existing classes
             const maxClassId = existingClasses.length > 0 ? Math.max(...existingClasses.map((cls) => Number(cls.class_id))) : 0;
@@ -178,16 +192,6 @@ function CreateClass() {
                 staff_emails: selectedStaff.map((staff) => staff.email)
             };
 
-            // Check if the className already exists
-            const existingClass = existingClasses.find((cls) => cls.roomName === roomName);
-
-            if (existingClass) {
-                console.error('Class name already exists:', roomName);
-                alert('Room name already exists. Please choose a different name.');
-                window.location.href = 'http://localhost:3001/#open-modal';
-                return;
-            }
-
             // Send a POST request to create the new class
             const createResponse = await axios.post('http://localhost:3000/classes', newClass);
             console.log('Created class:', createResponse.data);
@@ -200,10 +204,23 @@ function CreateClass() {
             setSelectedStaffs([]);
             setRoomName('');
             setIsInputValid(false);
+            document.getElementById('class-name-error').innerText = ''; // Clear the error message
         } catch (error) {
             console.error('Error creating class:', error);
         }
     };
+
+    // Handle change in room name input field
+    const handleRoomNameChange = (event) => {
+        const errorElement = document.getElementById('class-name-error');
+        if (errorElement.innerText) {
+            errorElement.innerText = ''; // Clear the error message
+        }
+        document.getElementById('class-name-input').style.borderColor = ''; // Reset the border color
+        setRoomName(event.target.value);
+    }
+
+
 
     // Replace with the homepage 
     const handleCancel = () => {
@@ -231,13 +248,15 @@ function CreateClass() {
                             id="class-name-input"
                             placeholder="Class name (required)"
                             value={roomName}
-                            onChange={(event) => setRoomName(event.target.value)}
+                            onChange={handleRoomNameChange}
                             style={{ borderColor: isFormSubmitted && !roomName ? "red" : "" }}
                         />
                         {isFormSubmitted && !roomName && (
                             <div className={cx("error-message")}>Please fill in the room name</div>
                         )}
+                        <div id="class-name-error" className={cx("error-message")}></div>
                     </div>
+
                     <div className={cx("modal-window__input")}>
                         <input
                             type="text"

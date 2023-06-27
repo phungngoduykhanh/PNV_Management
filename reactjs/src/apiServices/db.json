@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "email": "hoty@123.com",
+      "email": "tyho24@student.passerellesnumeriques.org",
       "password": "12345",
       "role": "staff"
     },
@@ -102,31 +102,19 @@
     },
     {
       "class_id": 2,
-      "roomName": "PNV 26A",
+      "roomName": "PNV 24B",
       "teacher_emails": [
         "khanhphung@123.com"
       ],
       "student_emails": [
-        "hieunguye@123.com"
+        "hieunguye@123.com",
+        "xuan@123.com",
+        "quandang@123.com"
       ],
       "staff_emails": [
-        "hoty@123.com"
+        "tyho24@student.passerellesnumeriques.org"
       ],
-      "id": "reE2__e"
-    },
-    {
-      "class_id": 3,
-      "roomName": "PNV 27A",
-      "teacher_emails": [
-        "khanhphung@123.com"
-      ],
-      "student_emails": [
-        "hieunguye@123.com"
-      ],
-      "staff_emails": [
-        "hoty@123.com"
-      ],
-      "id": "iJDGIHt"
+      "id": "rcPT8Ls"
     }
   ]
 }
