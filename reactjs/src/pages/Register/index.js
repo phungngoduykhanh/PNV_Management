@@ -40,6 +40,12 @@ function Register() {
       toast.error('Định dạng email không hợp lệ. Email phải có đuôi @gmail.com');
       return;
     }
+    
+    // Kiểm tra xác nhận mật khẩu
+    if (formData.password !== formData.confirmpassword) {
+      toast.error('Xác nhận mật khẩu không đúng. Vui lòng nhập lại.');
+      return;
+    }
 
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/check-user', {
