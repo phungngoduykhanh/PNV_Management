@@ -73,7 +73,7 @@ function Register() {
       }
     } catch (error) {
       console.error(error);
-      console.log('Đăng ký thất bại. Vui lòng thử lại.');
+      console.log('Đăng ký thất bại. Vui lòng thử lại hoặc.');
     }
   };
 
