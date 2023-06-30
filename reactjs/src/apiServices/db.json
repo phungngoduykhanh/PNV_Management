@@ -2,9 +2,9 @@
   "users": [
     {
       "id": 1,
-      "email": "hoty@123.com",
-      "password":"12345",
-      "role": "user"
+      "email": "tyho24@student.passerellesnumeriques.org",
+      "password": "12345",
+      "role": "staff"
     },
     {
       "id": 2,
@@ -15,8 +15,100 @@
     {
       "id": 3,
       "email": "khanhphung@123.com",
-      "password":"12345",
-      "role": "user"
+      "password": "12345",
+      "role": "teacher"
+    },
+    {
+      "id": 4,
+      "email": "hieunguye@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 5,
+      "email": "quandang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 6,
+      "email": "xuan@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 7,
+      "email": "thang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 10,
+      "email": "nhat@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 11,
+      "email": "huu@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 12,
+      "email": "minh@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 13,
+      "email": "quang@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 14,
+      "email": "loan@123.com",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 15,
+      "email": "xuan@123.com",
+      "password": "12345",
+      "role": "student"
+    }
+  ],
+  "classes": [
+    {
+      "id": "1",
+      "class_id": 1,
+      "roomName": "PNV 24A",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ],
+      "staff_emails": [
+        "staff1@example.com",
+        "staff2@example.com",
+        "staff3@example.com"
+      ]
+    },
+    {
+      "class_id": 2,
+      "roomName": "PNV 24B",
+      "teacher_emails": [
+        "khanhphung@123.com"
+      ],
+      "student_emails": [],
+      "staff_emails": [],
+      "id": "zLAjbEj"
     }
   ]
 }

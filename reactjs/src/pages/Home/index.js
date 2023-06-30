@@ -1,8 +1,11 @@
-function Home(){
+import CreateClass from "./CreareClass/CreateClass";
+
+
+function Home() {
 
     return (
         <div>
-            home page hellu
+            <CreateClass/>
         </div>
       
     )
