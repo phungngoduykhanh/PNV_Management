@@ -99,22 +99,6 @@
         "staff2@example.com",
         "staff3@example.com"
       ]
-    },
-    {
-      "class_id": 2,
-      "roomName": "PNV 24B",
-      "teacher_emails": [
-        "khanhphung@123.com"
-      ],
-      "student_emails": [
-        "hieunguye@123.com",
-        "xuan@123.com",
-        "quandang@123.com"
-      ],
-      "staff_emails": [
-        "tyho24@student.passerellesnumeriques.org"
-      ],
-      "id": "rcPT8Ls"
     }
   ]
 }

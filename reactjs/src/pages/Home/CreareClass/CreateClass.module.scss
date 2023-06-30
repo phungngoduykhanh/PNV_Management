@@ -48,7 +48,6 @@
 
   .modal-window__content {
     width: 400px;
-    // min-height: 250px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -93,10 +92,10 @@
           border-radius: 4px;
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
           box-sizing: border-box;
-          pointer-events: none;
           overflow-x: hidden;
           overflow-y: auto;
           pointer-events: auto;
+
           li {
             display: flex;
             padding: 5px;
@@ -112,15 +111,15 @@
               border-radius: 0px 2px 2px 0px;
               cursor: pointer;
               pointer-events: auto;
-              &:hover{
-                background-color: #FF7452;
+              &:hover {
+                background-color: #ff7452;
               }
             }
           }
         }
       }
 
-      .error-message{
+      .error-message {
         font-size: 13px;
         padding: 5px 5px 0px 5px;
         color: red;
@@ -133,7 +132,7 @@
       margin-top: 20px;
       cursor: pointer;
       .modal-window__close {
-         color: #000;
+        color: #000;
         padding: 8px;
         text-align: center;
         text-decoration: none;
@@ -162,7 +161,6 @@
         &:focus {
           outline: none;
         }
-        
       }
     }
 

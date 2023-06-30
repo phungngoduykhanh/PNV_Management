@@ -56,7 +56,7 @@ function CreateClass() {
         const isStaffSelected = selectedStaff.length > 0;
         const isStudentsSelected = selectedStudents.length > 0;
 
-        setIsInputValid(isroomNameValid && isTeachersSelected && isStaffSelected && isStudentsSelected);
+        setIsInputValid(isroomNameValid && (isTeachersSelected || isStaffSelected || isStudentsSelected));
     };
 
     //handle teachers
@@ -148,11 +148,11 @@ function CreateClass() {
 
     // handle create chat room
     const handleCreateChat = async () => {
-        const roomName = document.getElementById('class-name-input').value;
+        const roomNameInput = document.getElementById('class-name-input');
+        const roomName = roomNameInput.value;
 
-        //-----Verification input value-----
+        // ----- Verification input value -----
         if (!isInputValid) {
-            setIsInputValid(false);
             setIsFormSubmitted(true);
             return;
         }
@@ -172,8 +172,9 @@ function CreateClass() {
             const existingClass = existingClasses.find((cls) => cls.roomName === roomName);
 
             if (existingClass) {
-                document.getElementById('class-name-input').style.borderColor = "red";
-                document.getElementById('class-name-error').innerText = 'Room name already exists. Please choose a different name.';
+                roomNameInput.style.borderColor = 'red';
+                document.getElementById('class-name-error').innerText =
+                    'Room name already exists. Please choose a different name.';
                 return;
             }
 
@@ -189,7 +190,7 @@ function CreateClass() {
                 roomName: roomName,
                 teacher_emails: selectedTeachers.map((teacher) => teacher.email),
                 student_emails: selectedStudents.map((student) => student.email),
-                staff_emails: selectedStaff.map((staff) => staff.email)
+                staff_emails: selectedStaff.map((staff) => staff.email),
             };
 
             // Send a POST request to create the new class
@@ -197,14 +198,16 @@ function CreateClass() {
             console.log('Created class:', createResponse.data);
             if (createResponse) {
                 alert('Create room successful');
+                // Reset the selected users state and any other relevant state
+                setSelectedTeachers([]);
+                setSelectedStudents([]);
+                setSelectedStaffs([]);
+                setRoomName('');
+                setIsInputValid(false);
+                setIsFormSubmitted(false); // Reset the form submission flag
+                roomNameInput.style.borderColor = ''; // Reset the border color
+                document.getElementById('class-name-error').innerText = ''; // Clear the error message
             }
-            // Reset the selected users state and any other relevant state
-            setSelectedTeachers([]);
-            setSelectedStudents([]);
-            setSelectedStaffs([]);
-            setRoomName('');
-            setIsInputValid(false);
-            document.getElementById('class-name-error').innerText = ''; // Clear the error message
         } catch (error) {
             console.error('Error creating class:', error);
         }
@@ -263,9 +266,9 @@ function CreateClass() {
                             placeholder="Add Teacher"
                             value={teacherSearchTerm}
                             onChange={handleTeacherSearchTermChange}
-                            style={{ borderColor: isFormSubmitted && !teacherSearchTerm && selectedTeachers.length ===0 ? "red" : "" }}
+                            style={{ borderColor: isFormSubmitted && !teacherSearchTerm && selectedTeachers.length === 0 && !isInputValid ? "red" : "" }}
                         />
-                        {isFormSubmitted && !teacherSearchTerm && selectedTeachers.length === 0 && (
+                        {isFormSubmitted && !teacherSearchTerm && selectedTeachers.length === 0 && !isInputValid &&  (
                             <div className={cx("error-message")}>Please add teacher email</div>
                         )}
                         {teacherSearchTerm && teacherSearchResults.length > 0 && (
@@ -294,9 +297,9 @@ function CreateClass() {
                             placeholder="Add Staff"
                             value={staffSearchTerm}
                             onChange={handleStaffSearchTermChange}
-                            style={{ borderColor: isFormSubmitted && !staffSearchTerm && selectedStaff.length === 0 ? "red" : "" }}
+                            style={{ borderColor: isFormSubmitted && !staffSearchTerm && selectedStaff.length === 0 && !isInputValid ? "red" : "" }}
                         />
-                        {isFormSubmitted && !staffSearchTerm && selectedStaff.length === 0 && (
+                        {isFormSubmitted && !staffSearchTerm && selectedStaff.length === 0 && !isInputValid && (
                             <div className={cx("error-message")}>Please add staff email</div>
                         )}
                         {staffSearchTerm && staffSearchResults.length > 0 && (
@@ -329,9 +332,9 @@ function CreateClass() {
                             placeholder="Add Student"
                             value={studentSearchTerm}
                             onChange={handleStudentSearchTermChange}
-                            style={{ borderColor: isFormSubmitted && !studentSearchTerm && selectedStudents.length === 0 ? "red" : "" }}
+                            style={{ borderColor: isFormSubmitted && !studentSearchTerm && selectedStudents.length === 0 && !isInputValid ? "red" : "" }}
                         />
-                        {isFormSubmitted && !studentSearchTerm && selectedStudents.length === 0 && (
+                        {isFormSubmitted && !studentSearchTerm && selectedStudents.length === 0 && !isInputValid && (
                             <div className={cx("error-message")}>Please add student email</div>
                         )}
                         {studentSearchTerm && studentSearchResults.length > 0 && (
