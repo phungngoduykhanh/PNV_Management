@@ -99,6 +99,16 @@
         "staff2@example.com",
         "staff3@example.com"
       ]
+    },
+    {
+      "class_id": 2,
+      "roomName": "PNV 24B",
+      "teacher_emails": [
+        "khanhphung@123.com"
+      ],
+      "student_emails": [],
+      "staff_emails": [],
+      "id": "zLAjbEj"
     }
   ]
 }

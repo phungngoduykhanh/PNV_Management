@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import classNames from 'classnames/bind';
@@ -148,6 +149,7 @@ function CreateClass() {
 
     // handle create chat room
     const handleCreateChat = async () => {
+
         const roomNameInput = document.getElementById('class-name-input');
         const roomName = roomNameInput.value;
 
@@ -226,8 +228,9 @@ function CreateClass() {
 
 
     // Replace with the homepage 
+    const navigate = useNavigate();
     const handleCancel = () => {
-        window.location.href = 'http://localhost:3001/'; 
+        navigate(-1);
     };
 
     return (
