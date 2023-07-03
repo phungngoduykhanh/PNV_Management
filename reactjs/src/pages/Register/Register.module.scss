@@ -11,9 +11,11 @@
    display: flex;
    justify-content: center;
    align-items: center;
-
-  }
-  .text-center{
+   position: absolute;
+   left: 50%;
+   top: 45%;
+   transform: translate(-50%, -50%);
+   .text-center{
     color: white;
     position: relative;
     top: 40px;
@@ -45,7 +47,7 @@
     position: relative;
     top: 10px;
 }
-button{
+.button{
     background-color: #35A6F2;
     width: 300px;
     height: 40px;
@@ -55,7 +57,9 @@ button{
     border-radius: 8px;
     position: relative;
     right: 16px;
-
+}
+.term{
+  color: #ffffff;
 }
 i {
     color: #35A6F2;
@@ -87,3 +91,5 @@ i {
     position:relative ;
     
 }
+  }
+  

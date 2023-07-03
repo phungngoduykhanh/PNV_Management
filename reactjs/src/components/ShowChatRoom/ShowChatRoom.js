@@ -2,25 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 library.add(faCog);
 
 import classNames from 'classnames/bind';
-import styles from './ShowClass.module.scss'; 
+import styles from './ShowChatRoom.module.scss'; 
 import axios from 'axios';
 const cx = classNames.bind(styles);
 
-function ShowClass() {
-    const [classes, setClasses] = useState([]);
+function ShowChatRoom() {
+    const navigate = useNavigate();
+    const [chatroom, setChatroom] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem('token'); 
-        axios.get('http://127.0.0.1:8000/api/class', {
+        console.log(token);
+        axios.get('http://127.0.0.1:8000/api/chatroom', {
             headers: {
               Authorization: `Bearer ${token}`, 
             },
           }).then(data => {
                 console.log(data);
-                setClasses(data.data);
+                setChatroom(data.data);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -28,24 +31,24 @@ function ShowClass() {
             );
     }, []);
 
-    const handleCardClick = (classId) => {
+    const handleCardClick = (chatroomId) => {
         // Chuyển hướng khi người dùng nhấp vào card
-        window.location.href = `http://example/class/${classId}`;
+        navigate(`/chatroom/${chatroomId}`);
     };
 
 
     return (
-        <div className={cx('container-class')}>
-            {classes.map(classData => (
-                <div className={cx('card-class')} key={classData.id}
-                    onClick={()=> handleCardClick(classData.id)}
+        <div className={cx('container-chatroom')}>
+            {chatroom.map(chatroomData => (
+                <div className={cx('card-chatroom')} key={chatroomData.id}
+                    onClick={()=> handleCardClick(chatroomData.id)}
 
                 >
-                    <div className={cx('class-header')}>
-                        <img src={classData.img} alt='img' />
-                        <span>{classData.classname}</span>
+                    <div className={cx('chatroom-header')}>
+                        <img src={chatroomData.img} alt='img' />
+                        <span>{chatroomData.chatroomname}</span>
                     </div>
-                    <div className={cx('class-body')}>
+                    <div className={cx('chatroom-body')}>
                         <a href="#"><FontAwesomeIcon icon={faCog} className={cx('class-icon')} /></a>
                     </div>
                 </div>
@@ -54,4 +57,4 @@ function ShowClass() {
 );
 }
 
-export default ShowClass;
+export default ShowChatRoom;

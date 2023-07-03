@@ -2,8 +2,12 @@
 /*------Login CSS-------*/
 
 .container{
+  position: absolute;
   text-align:center;
   width: 500px;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .container *{
   box-sizing:border-box;

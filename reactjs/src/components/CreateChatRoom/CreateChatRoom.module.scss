@@ -4,6 +4,7 @@
     width: 150px;
     height: 20px;
     margin-bottom: 50px;
+    margin-top: 50px;
     .container__interior {
       text-align: center;
   
@@ -80,10 +81,6 @@
           }
         }
   
-        // &:not(:last-of-type) {
-        //   margin-top: 20px;
-        // }
-  
         .selected {
           .selected-results {
             display: flex;
@@ -98,24 +95,34 @@
             pointer-events: none;
             overflow-x: hidden;
             overflow-y: auto;
-             pointer-events: auto;
+            pointer-events: auto;
             li {
               display: flex;
               padding: 5px;
               span {
-                padding: 0px;
+                padding: 2px;
                 background-color: #ccc;
-                border-radius: 1px;
-                margin-right: 10px;
+                border-radius: 2px 0px 0px 2px;
               }
               button {
-                background-color: transparent;
+                background-color: #ccc;
+                font-size: 10px;
                 border: none;
+                border-radius: 0px 2px 2px 0px;
                 cursor: pointer;
-                 pointer-events: auto;
+                pointer-events: auto;
+                &:hover{
+                  background-color: #FF7452;
+                }
               }
             }
           }
+        }
+  
+        .error-message{
+          font-size: 13px;
+          padding: 5px 5px 0px 5px;
+          color: red;
         }
       }
   
@@ -123,9 +130,9 @@
         display: flex;
         justify-content: flex-end;
         margin-top: 20px;
-  
+        cursor: pointer;
         .modal-window__close {
-          color: #000;
+           color: #000;
           padding: 8px;
           text-align: center;
           text-decoration: none;
@@ -141,20 +148,20 @@
         }
   
         .modal-window__create {
-          color: #ffffff;
+          color: #000;
           text-decoration: none;
           padding: 8px;
           border-radius: 5px;
-          background-color: #044fbf;
           text-align: center;
   
           &:hover {
-            background-color: #044fbfda;
+            background-color: rgba(229, 234, 233, 0.36);
             border-radius: 5px;
           }
           &:focus {
             outline: none;
           }
+          
         }
       }
   
@@ -174,12 +181,11 @@
         pointer-events: none;
   
         li {
-          padding: 8px 12px;
+          padding: 2px 12px;
   
           button {
             display: block;
             text-decoration: none;
-            color: #333;
   
             &:hover {
               background-color: #f0f0f0;

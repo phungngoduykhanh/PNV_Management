@@ -139,6 +139,7 @@ const UserProfileEdit = () => {
               <select value={user.role}  name="role" id="role" onChange={handleRole}>
                 <option value="teacher">Teacher</option>
                 <option value="student">Student</option>
+                <option value="staff">Staff</option>
               </select>
             </label>
             <br />

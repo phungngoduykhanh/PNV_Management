@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { publicRoutes } from "./routes";
 import { DefaultLayout } from "./layouts";
 import { AuthProvider } from "./components/AuthContext";
+
+import './assets/styles/styles.module.scss';
 function App() {
   return (
     <AuthProvider>

@@ -34,10 +34,9 @@ function Register() {
       toast.error('Mật khẩu phải có ít nhất 6 ký tự');
       return;
     }
-    // Kiểm tra định dạng email có đuôi @gmail.com
-    const emailRegex = /^[A-Z0-9._%+-]+@gmail\.com$/i;
-    if (!emailRegex.test(formData.email)) {
-      toast.error('Định dạng email không hợp lệ. Email phải có đuôi @gmail.com');
+    // Kiểm tra xác nhận mật khẩu
+    if (formData.password !== formData.confirmpassword) {
+      toast.error('Xác nhận mật khẩu không đúng. Vui lòng nhập lại.');
       return;
     }
 
@@ -61,6 +60,9 @@ function Register() {
         });
         if (response.data.code === 201) {
           toast.success('Đăng ký thành công!');
+          setTimeout(() => {
+            window.location.href= 'http://localhost:3000/login';
+          }, 1000);
         } else {
           toast.error('Đăng ký thất bại. Vui lòng thử lại.');
         }
@@ -131,12 +133,12 @@ function Register() {
             <div className={cx('')}>
               <p>
                 <FontAwesomeIcon icon={faCheckToSlot} style={{ color: '#35A6F2' }} className={cx('aCheckToSlot')} />
-                <div>I agree to the terms & conditions</div>
+                <div className={cx("term")}>I agree to the terms & conditions</div>
               </p>
             </div>
 
             <div className={cx('')}>
-              <button className={cx('my-2', 'mx-auto', 'btn', 'btn-dark')} type="submit">
+              <button className={cx('my-2', 'mx-auto', 'btn', 'btn-dark','button')} type="submit">
                 Register
               </button>
             </div>
