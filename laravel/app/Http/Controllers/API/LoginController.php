@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\SessionUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class LoginController extends Controller
 {
@@ -16,16 +19,28 @@ class LoginController extends Controller
             'password'=> $request->password
         ];
         if (auth()->attempt($dataCheckLogin)) {
-
-            $checkTokenExit = SessionUser::where('user_id',auth()->id())->first();
+            $userId = auth()->id();
+            $checkTokenExit = SessionUser::where('user_id',$userId)->first();
             if(empty($checkTokenExit)){
-                $userSession = SessionUser::create([
-                    'token'=> Str::random(40),
-                    'refresh_token'=> Str::random(40),
-                    'token_expried'=>date("Y-m-d H:i:s", strtotime("+30 day")),
-                    'refresh_token_expried'=>date("Y-m-d H:i:s", strtotime("+360 day")),
-                    'user_id'=> auth()->id()
-                ]);
+
+            $token = Str::random(40);
+            $refreshToken = Str::random(40);
+            $tokenExpried = date("Y-m-d H:i:s", strtotime("+30 day"));
+            $refreshTokenExpried = date("Y-m-d H:i:s", strtotime("+360 day"));
+
+            $userSession = SessionUser::create([
+                'token' => $token,
+                'refresh_token' => $refreshToken,
+                'token_expried' => $tokenExpried,
+                'refresh_token_expried' => $refreshTokenExpried,
+                'user_id' => auth()->id()
+            ]);
+            
+            $user = User::find($userId);
+
+            $database =Firebase::database();
+            $database->getReference('users/' .$userId)->set($user);
+
             }else{
                 $userSession = $checkTokenExit;
             }

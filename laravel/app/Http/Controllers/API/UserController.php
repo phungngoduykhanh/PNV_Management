@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SessionUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -42,9 +43,13 @@ class UserController extends Controller
         }
     }
 
-    public function search($term){
-
-        $users = User::where('email','LIKE',"%".$term. "%")->get();
+    public function search($term, $id){
+        
+        $currentUserId = $id;
+        
+        $users = User::where('email', 'LIKE', "%".$term."%")
+        ->whereNotIn('id', [$currentUserId])
+        ->get();
 
         return response()->json($users);
     }

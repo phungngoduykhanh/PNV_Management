@@ -2,26 +2,26 @@
 
 namespace App\Mail;
 
+use App\Models\ChatRoom;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Classes;
 
-class ClassInvitation extends Mailable
+class ChatRoomInvitation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $class;
+    public $chatroom;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Classes $class)
+    public function __construct(ChatRoom $chatroom)
     {
-        $this->class = $class;
+        $this->chatroom = $chatroom;
     }
 
     /**
@@ -31,7 +31,7 @@ class ClassInvitation extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mời tham gia lớp học')
-                    ->view('emails.class_invitation');
+        return $this->subject('Invitation to Chatroom')
+                    ->view('emails.chatroom_invitation');
     }
 }

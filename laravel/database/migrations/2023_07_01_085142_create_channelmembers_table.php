@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('channelmembers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('channel_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('chatroom_id');
-            $table->string('status')->default('pending');
             $table->timestamps();
+
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('chatroom_id')->references('id')->on('chat_rooms')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('channelmembers');
     }
 };

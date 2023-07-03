@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('chat_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('classname')->unique();
-            $table->unsignedBigInteger('instructor_id');
-
-            $table->foreign('instructor_id')
+            $table->string('chatroomname')->unique();
+            $table->unsignedBigInteger('owner_id');
+            
+            $table->foreign('owner_id')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
             $table->string('background_img')->nullable();
+            $table->string('description')->nullable();
             $table->string('img')->default('https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-1-480x600.jpg');
             $table->timestamps();
         });
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('chatrooms');
     }
 };

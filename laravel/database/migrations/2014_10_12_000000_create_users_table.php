@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('name');
             $table->string('background_img')->nullable();
-            $table->string('img')->nullable();
+            $table->string('img')->default('https://bloghomestay.vn/wp-content/uploads/2023/01/top-100-anh-gai-xinh-tik-tok-cute-dang-yeu-thoi-thuong-cuc-hot_6.jpg');
             $table->string('email')->unique();
             $table->integer('phone')->nullable();
             $table->string('address')->nullable();
