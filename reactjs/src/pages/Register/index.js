@@ -28,15 +28,13 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Kiểm tra mật khẩu có ít nhất 6 ký tự
     if (formData.password.length < 6) {
       toast.error('Mật khẩu phải có ít nhất 6 ký tự');
       return;
     }
-    // Kiểm tra xác nhận mật khẩu
+    
     if (formData.password !== formData.confirmpassword) {
-      toast.error('Xác nhận mật khẩu không đúng. Vui lòng nhập lại.');
+      toast.error('Xác nhận mật khẩu không đúng. Vui lòng nhập lại!');
       return;
     }
 
@@ -50,7 +48,7 @@ function Register() {
       const existsData = response.data.exists;
       setExists(existsData);
       if (existsData.username || existsData.email) {
-        toast.error('Username hoặc email đã tồn tại');
+        toast.error('Username hoặc email đã tồn tại!');
       } else {
         console.log('Tiếp tục xử lý đăng ký');
         const response = await axios.post('http://127.0.0.1:8000/api/register', {
@@ -91,6 +89,7 @@ function Register() {
                 placeholder="User Name"
                 value={formData.username}
                 onChange={handleChange}
+                autoComplete="off" 
               />
               <FontAwesomeIcon icon={faUser} style={{ color: '#ffffff' }} className={cx('custom-icon')} />
             </div>
@@ -103,6 +102,7 @@ function Register() {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="off" 
               />
               <FontAwesomeIcon icon={faEnvelope} style={{ color: '#ffffff' }} className={cx('custom-icon')} />
             </div>
