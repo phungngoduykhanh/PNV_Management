@@ -157,11 +157,6 @@ const UserProfile = () => {
                   <MDBCardText className="m-0"></MDBCardText>
                   <MDBCardText className="m-0 text-muted">{user.phone}</MDBCardText>
                 </MDBListGroupItem>
-                {/* <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                  <MDBIcon fas icon="mobile-alt fa-lg text-warning" />
-                  <MDBCardText className="m-0"></MDBCardText>
-                  <MDBCardText className="m-0 text-muted">{user.}</MDBCardText>
-                </MDBListGroupItem> */}
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                   <MDBIcon fas icon="map-marker-alt fa-lg text-warning" />
                   <MDBCardText className="m-0"></MDBCardText>
