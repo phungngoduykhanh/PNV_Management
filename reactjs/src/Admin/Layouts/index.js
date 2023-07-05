@@ -1,14 +1,15 @@
 import React from 'react'
 import Header from './Header';
-import ChatRoomList from '../Tables/chatRoomList';
-import { Outlet } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import Sidebar from './Sidebar/MenuAdmin';
 
-function LayoutAdmin() {
+function LayoutAdmin({ children }) {
     return (
-        <div id="content-wrapper">
-            <Header />
-            <Outlet /> 
+        <div id="wrapper">
+            <Sidebar />
+            <div id="content-wrapper">
+                <Header />
+                {children}
+            </div>
         </div>
     )
 }
