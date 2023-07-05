@@ -6,7 +6,7 @@ function Sidebar() {
     return (
         <>
             {/* Sidebar */}
-            <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
                 {/* Sidebar - Brand */}
                 <a className="sidebar-brand d-flex align-items-center justify-content-center">
                     <div className="sidebar-brand-icon rotate-n-15">
@@ -14,8 +14,7 @@ function Sidebar() {
                         <img className='logo' src={logo} height={50} />
                     </div>
                 </a>
-                {/* Divider */}
-                <hr className="sidebar-divider my-0" />
+             
                 {/* Divider */}
                 <hr className="sidebar-divider" />
                 {/* Heading */}
