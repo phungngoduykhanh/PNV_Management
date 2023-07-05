@@ -1,4 +1,3 @@
-
 function WithoutLayout({ children }) {
   return (
     <div className="wrapper">

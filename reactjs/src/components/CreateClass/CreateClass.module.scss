@@ -1,0 +1,199 @@
+.wrapper{
+  .container-modal {
+    display: block;
+    width: 150px;
+    height: 20px;
+    margin-bottom: 50px;
+    .container__interior {
+      text-align: center;
+  
+      .btn {
+        width: 100px;
+        left: 20%;
+        top: 6rem;
+        background-color: #fff;
+        padding: 0.5em 1em;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.13);
+  
+        i {
+          padding-right: 0.3em;
+        }
+      }
+    }
+  }
+  
+  .modal-window {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+  
+    &:target {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  
+    .modal-window__content {
+      width: 400px;
+      // min-height: 250px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 2em;
+      background: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  
+      .modal-window__title {
+        font-size: 1.5rem;
+        margin: 0 0 15px;
+        font-weight: bold;
+      }
+  
+      .modal-window__input {
+        input[type="text"] {
+          width: 100%;
+          height: 2.1rem;
+          border: none;
+          outline: none;
+          padding: 5px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          position: relative;
+          margin-top: 20px;
+  
+          &:focus + .dropdown-menu {
+            display: block;
+          }
+        }
+  
+        // &:not(:last-of-type) {
+        //   margin-top: 20px;
+        // }
+  
+        .selected {
+          .selected-results {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            width: 100%;
+            padding-left: 0px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+            pointer-events: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+             pointer-events: auto;
+            li {
+              display: flex;
+              padding: 5px;
+              span {
+                padding: 0px;
+                background-color: #ccc;
+                border-radius: 1px;
+                margin-right: 10px;
+              }
+              button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                 pointer-events: auto;
+              }
+            }
+          }
+        }
+      }
+  
+      .modal-window__button {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+  
+        .modal-window__close {
+          color: #000;
+          padding: 8px;
+          text-align: center;
+          text-decoration: none;
+          margin-right: 10px;
+  
+          &:hover {
+            background-color: rgba(229, 234, 233, 0.36);
+            border-radius: 5px;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+  
+        .modal-window__create {
+          color: #ffffff;
+          text-decoration: none;
+          padding: 8px;
+          border-radius: 5px;
+          background-color: #044fbf;
+          text-align: center;
+  
+          &:hover {
+            background-color: #044fbfda;
+            border-radius: 5px;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+  
+      .dropdown-menu {
+        position: absolute;
+        width: 85%;
+        display: none;
+        list-style-type: none;
+        margin-top: 5px;
+        padding: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        box-sizing: border-box;
+        pointer-events: none;
+  
+        li {
+          padding: 8px 12px;
+  
+          button {
+            display: block;
+            text-decoration: none;
+            color: #333;
+  
+            &:hover {
+              background-color: #f0f0f0;
+            }
+          }
+        }
+      }
+  
+      &:hover {
+        .dropdown-menu {
+          display: block;
+          pointer-events: auto;
+        }
+      }
+    }
+  }
+}
