@@ -1,0 +1,128 @@
+.container-Admin__table {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .table-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .table-body {
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: #f1f1f1;
+
+        .table-row {
+          th {
+            text-align: center;
+            padding: 12px;
+            font-weight: 600;
+          }
+        }
+      }
+
+      tbody {
+        .table-row {
+          &:nth-child(odd) {
+            background-color: #ffffff;
+          }
+
+          td {
+            padding: 12px;
+            text-align: center;
+
+            &.table-name {
+              display: flex;
+              align-items: center;
+
+              .table-avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                margin-right: 10px;
+                object-fit: cover;
+              }
+
+              .table-cell-content {
+                display: flex;
+                flex-direction: column;
+
+                .table-info-inner {
+                  text-align: center;
+
+                  .table-info-title {
+                    font-size: 18px;
+                    margin: 0px;
+                    padding-top: 20px;
+                  }
+
+                  .table-info-body {
+                    .table-info-list {
+                      padding: 0;
+                      margin: 0;
+
+                      .table-info-item {
+                        display: flex;
+                        font-size: 14px;
+                        align-items: center;
+                        padding-bottom: 30px;
+                        margin-top: 5px;
+                        color: rgb(102, 99, 99);
+                        svg {
+                          padding: 1px;
+                          transform: rotate(90deg);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .table-avatar__room {
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              margin-right: 10px;
+              object-fit: cover;
+            }
+
+            .role-button{
+              border: none;
+              border-radius:2px;
+            }
+               
+              .admin {
+                background-color: #FF6347;
+                color: white;
+                
+              }
+  
+              .teacher {
+                background-color: #3CB371;
+                color: white;
+              }
+  
+              .staff {
+                background-color: #FFD700;
+                color: black;
+              }
+            
+
+            &.table-action {
+              color: #ff0000;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

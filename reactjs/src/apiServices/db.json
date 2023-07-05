@@ -1,22 +1,171 @@
 {
   "users": [
     {
-      "id": 1,
-      "email": "hoty@123.com",
-      "password":"12345",
-      "role": "user"
-    },
-    {
       "id": 2,
       "email": "admin@123.com",
+      "name": "Nguyen Minh Hieu",
+      "phone": "01223141",
+      "image": " https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
       "password": "12345",
       "role": "admin"
     },
     {
       "id": 3,
       "email": "khanhphung@123.com",
-      "password":"12345",
-      "role": "user"
+      "name": "Le Thanh Tung",
+      "phone": "01223141",
+      "image": " https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 6,
+      "email": "bien@123.com",
+      "name": "Phu Ngo Duy Khanh",
+      "phone": "01223141",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 7,
+      "email": "quan@123.com",
+      "name": "Truong Thi Hang Thu",
+      "phone": "01223141",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg ",
+      "password": "12345",
+      "role": "teacher"
+    },
+    {
+      "id": 7,
+      "email": "quan@123.com",
+      "name": "Truong Thi Hang Thu",
+      "phone": "01223141",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg ",
+      "password": "12345",
+      "role": "teacher"
+    },
+    {
+      "id": 7,
+      "email": "quan@123.com",
+      "name": "Truong Thi Hang Thu",
+      "phone": "01223141",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg ",
+      "password": "12345",
+      "role": "teacher"
+    },
+    {
+      "id": 8,
+      "email": "bien@123.com",
+      "name": "Ngo Ba Kha",
+      "phone": "01223141",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "12345",
+      "role": "student"
+    },
+    {
+      "id": 11,
+      "email": "bien3@123.com",
+      "name": "Le Van C",
+      "phone": "0123123123",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "qwerty",
+      "role": "student"
+    },
+    {
+      "id": 12,
+      "email": "bien4@123.com",
+      "name": "Pham Thi D",
+      "phone": "0912345678",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "zxcvb",
+      "role": "student"
+    },
+    {
+      "id": 13,
+      "email": "bien5@123.com",
+      "name": "Hoang Van E",
+      "phone": "0123498765",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "password",
+      "role": "student"
+    },
+    {
+      "id": 14,
+      "email": "bien7@123.com",
+      "name": "Tran Van G",
+      "phone": "0123123412",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "98765",
+      "role": "student"
+    },
+    {
+      "id": 15,
+      "email": "bien3@123.com",
+      "name": "Le Van C",
+      "phone": "0123123123",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "qwerty",
+      "role": "student"
+    },
+    {
+      "id": 16,
+      "email": "bien4@123.com",
+      "name": "Pham Thi D",
+      "phone": "0912345678",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "zxcvb",
+      "role": "student"
+    },
+    {
+      "id": 18,
+      "email": "bien6@123.com",
+      "name": "Vu Thi F",
+      "phone": "0987612345",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "pass123",
+      "role": "student"
+    },
+    {
+      "id": 19,
+      "email": "bien7@123.com",
+      "name": "Tran Van G",
+      "phone": "0123123412",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "98765",
+      "role": "student"
+    },
+    {
+      "id": 20,
+      "email": "bien8@123.com",
+      "name": "Nguyen Thi H",
+      "phone": "0912876543",
+      "image": "https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg",
+      "password": "passw0rd",
+      "role": "student"
+    }
+  ],
+  "classes": [
+    {
+      "id": "1",
+      "room_id": 1,
+      "avatar": "https://cdn3.iconfinder.com/data/icons/education-flat-icon-1/130/138-512.png",
+      "roomName": "PNV 24A",
+      "teacher_emails": [
+        "teacher1@example.com",
+        "teacher2@example.com",
+        "teacher3@example.com"
+      ],
+      "student_emails": [
+        "student1@example.com",
+        "student2@example.com",
+        "student3@example.com"
+      ],
+      "staff_emails": [
+        "staff1@example.com",
+        "staff2@example.com",
+        "staff3@example.com"
+      ]
     }
   ]
 }
