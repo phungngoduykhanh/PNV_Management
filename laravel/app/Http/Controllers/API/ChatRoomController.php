@@ -96,4 +96,17 @@ class ChatRoomController extends Controller
 
         return response()->json($ChatRoom);
     }
+
+    public function deleteChatRoom(Request $request, $id)
+    {
+        $chatroom = ChatRoom::findOrFail($id);
+
+        $chatroom->delete();
+    
+
+        return response()->json([
+            'message' => 'Chatroom deleted successfully'
+        ]);
+    }
+
 }

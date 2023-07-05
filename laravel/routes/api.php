@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AdminConstroller;
 use App\Http\Controllers\API\ChatRoomController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\RegisterController;
@@ -52,3 +53,10 @@ Route::get('firebase-chatroom/{id}',function(Request $request){
     $id_chatroom = $request->id;
     
 });
+
+route::get('deleteChatroom/{id}',[ChatRoomController::class, 'deleteChatRoom']);
+
+//API Admin
+Route::get('Admin-user', [AdminConstroller::class, 'index']);
+
+Route::get('/delete-user/{id}', [AdminConstroller::class, 'deleteUser']);
