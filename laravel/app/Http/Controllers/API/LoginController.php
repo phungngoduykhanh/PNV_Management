@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
@@ -77,4 +79,5 @@ class LoginController extends Controller
             'message'=> "refresh token success"
         ],200);
     }
+  
 }

@@ -37,6 +37,7 @@ Route::post('update-user/{id}', [UserController::class, 'updateUser']);
 
 Route::get('/users/search/{term}/{id}', [UserController::class, 'search']);
 
+
 //Login token
 Route::post('login', [LoginController::class, 'login']);
 
@@ -49,12 +50,11 @@ Route::get('chatrooms', [ChatRoomController::class, 'getChatRoom']);
 
 Route::post('create-chatroom', [ChatRoomController::class, 'createChatRoomAndInvite']);
 
-Route::get('firebase-chatroom/{id}',function(Request $request){
+Route::get('firebase-chatroom/{id}', function (Request $request) {
     $id_chatroom = $request->id;
-    
 });
 
-route::get('deleteChatroom/{id}',[ChatRoomController::class, 'deleteChatRoom']);
+route::get('deleteChatroom/{id}', [ChatRoomController::class, 'deleteChatRoom']);
 
 //API Admin
 Route::get('Admin-user', [AdminConstroller::class, 'index']);
