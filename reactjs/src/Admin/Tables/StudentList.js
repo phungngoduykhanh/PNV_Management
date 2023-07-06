@@ -25,7 +25,7 @@ function StudentList() {
                 const data = await response.json();
 
                 // Xử lý dữ liệu ở đây
-                const students = data.filter(user => user.role === "student");
+                const students = data.filter(user => user.role === "student" && user.status !== "delete");
                 setStudentList(students);
                 setCurrentData(students);
             } else {

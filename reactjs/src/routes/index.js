@@ -14,7 +14,7 @@ const publicRoutes = [
   { path: "/Login", component: Login, layout: WithoutLayout },
   { path: "/Register", component: Register, layout: WithoutLayout },
   { path: "/user", component: UserProfile },
-  { path: "/admin", component: LayoutAdmin, layout: WithoutLayout },
+  { path: "/admin", component: ChatRoomList, layout: LayoutAdmin },
   {
     path: "/admin/chatroomlist", component: ChatRoomList, layout: LayoutAdmin
   },

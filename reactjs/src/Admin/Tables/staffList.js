@@ -24,7 +24,7 @@ function StaffList() {
                 const data = await response.json();
 
                 // Xử lý dữ liệu ở đây
-                const staffs = data.filter(user => user.role !== "student");
+                const staffs = data.filter(user => user.role !== "student" && user.status !== "delete");
                 setStaffList(staffs);
                 setCurrentData(staffs);
             } else {
