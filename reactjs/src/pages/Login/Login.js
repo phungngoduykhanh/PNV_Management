@@ -32,6 +32,7 @@ const Login = () => {
     setPwShown(!pwShown);
   };
 
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -52,11 +53,24 @@ const Login = () => {
       });
       const token = response.data.data.token;
       localStorage.setItem('token', token);
-      console.log(token);
+
+      // Check the user's role
+      const roleResponse = await axios.get('http://127.0.0.1:8000/api/user', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const role = roleResponse.data.role;
+
+      console.log("role", role);
 
       toast.success('Login success');
       setTimeout(() => {
-        window.location.href = 'http://localhost:3000/';
+        if (role === 'admin') {
+          window.location.href = 'http://localhost:3000/admin';
+        } else {
+          window.location.href = 'http://localhost:3000/';
+        }
       }, 2000);
     } catch (error) {
       console.error(error);
