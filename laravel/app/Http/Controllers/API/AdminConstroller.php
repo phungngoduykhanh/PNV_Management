@@ -24,23 +24,25 @@ class AdminConstroller extends Controller
 
         return response()->json($users);
     }
-    
+
     public function AdminUser()
     {
         $users = User::all();
 
         return response()->json($users);
     }
+
     public function deleteUser($id)
     {
-        $User = User::find($id);
+        $user = User::find($id);
 
-        if (!$User) {
+        if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $User->delete();
+        $user->status = 'delete';
+        $user->save();
+
         return response()->json(['message' => 'User deleted successfully']);
     }
-
 }
