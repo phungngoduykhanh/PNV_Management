@@ -3505,10 +3505,15 @@ a.badge-dark:focus {
 .close:not(:disabled):not(.disabled):hover {
   opacity: 0.75;
 }
+
 button.close {
   padding: 0;
   background-color: transparent;
   border: 0;
+}
+button.btn-close{
+background-color: white;
+border: none;
 }
 a.close.disabled {
   pointer-events: none;

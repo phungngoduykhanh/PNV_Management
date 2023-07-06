@@ -5,10 +5,14 @@ import { FaPhone, FaTrash } from 'react-icons/fa';
 import classNames from 'classnames/bind';
 import styles from '../Tables/Tables.module.scss';
 const cx = classNames.bind(styles);
+import { Modal, Button } from 'react-bootstrap';
+
 
 function StudentList() {
     const [studentList, setStudentList] = useState([]);
     const [currentData, setCurrentData] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [studentIdToDelete, setStudentIdToDelete] = useState(null);
 
     // call api show student
     const fetchData = async () => {
@@ -36,14 +40,24 @@ function StudentList() {
         }
     };
 
-    // handle delete student
-    const deleteStudent = async (id) => {
-        try {
-            await axios.get(`http://127.0.0.1:8000/api/delete-user/${id}`);
 
-            const updatedList = studentList.filter(student => student.id !== id);
-            setStudentList(updatedList);
-            setCurrentData(updatedList);
+    // handle delete student
+    const deleteStudent = (id) => {
+        setShowModal(true);
+        setStudentIdToDelete(id);
+    };
+
+    // handle confirm delete
+    const handleConfirmDelete = async () => {
+        try {
+            if (studentIdToDelete) {
+                await axios.get(`http://127.0.0.1:8000/api/delete-user/${studentIdToDelete}`);
+
+                const updatedList = studentList.filter(student => student.id !== studentIdToDelete);
+                setStudentList(updatedList);
+                setCurrentData(updatedList);
+            }
+            setShowModal(false);
         } catch (error) {
             console.error('Error deleting user:', error);
         }
@@ -106,6 +120,22 @@ function StudentList() {
                 </table>
                 <Pagination data={studentList} pageSize={5} setCurrentData={setCurrentData} />
             </div>
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Are you sure you want to delete this student?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={() => handleConfirmDelete()}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

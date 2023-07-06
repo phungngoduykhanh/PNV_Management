@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import Pagination from '../pagination/Pagination';
+import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+
 import classNames from 'classnames/bind';
 import styles from './Tables.module.scss';
-import axios from 'axios';
 const cx = classNames.bind(styles);
 
 
 function ChatRoomList() {
     const [roomList, setRoomList] = useState([]);
     const [currentData, setCurrentData] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [roomIdToDelete, setRoomIdToDelete] = useState(null);
 
     const fetchData = async () => {
         const token = localStorage.getItem('token');
@@ -33,19 +37,28 @@ function ChatRoomList() {
         }
     };
 
-    const deleteRoom = async (id) => {
-        console.log(id)
-        try {
-            await axios.get(`http://127.0.0.1:8000/api/deleteChatroom/${id}`);
-            const updatedRoom = roomList.filter(room => room.id !== id);
 
-            setRoomList(updatedRoom);
-            setCurrentData(updatedRoom);
+    // handle delete room
+    const deleteRoom = (id) => {
+        setShowModal(true);
+        setRoomIdToDelete(id);
+    };
+
+    // handle confirm delete
+    const handleConfirmDelete = async () => {
+        try {
+            if (roomIdToDelete) {
+                await axios.get(`http://127.0.0.1:8000/api/deleteChatroom/${roomIdToDelete}`);
+
+                const updatedRoom = roomList.filter(student => student.id !== roomIdToDelete);
+                setRoomList(updatedRoom);
+                setCurrentData(updatedRoom);
+            }
+            setShowModal(false);
         } catch (error) {
             console.error('Error deleting user:', error);
         }
     };
-
 
     useEffect(() => {
         fetchData();
@@ -87,6 +100,22 @@ function ChatRoomList() {
                 </table>
                 <Pagination data={roomList} pageSize={5} setCurrentData={setCurrentData} />
             </div>
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Are you sure you want to delete this student?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={() => handleConfirmDelete()}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
