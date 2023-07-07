@@ -101,6 +101,7 @@ const UserProfile = () => {
   };
 
   return (
+    <div class="my-container">
     <div className="main-content_">
       <div
         className="header_ pb-8_ pt-5_ pt-lg-8_ d-flex_ align-items-center_"
@@ -294,6 +295,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
