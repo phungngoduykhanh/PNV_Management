@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FaPhone, FaTrash } from 'react-icons/fa';
+import { FaPhone, FaTrash, FaEdit } from 'react-icons/fa';
 import axios from 'axios';
 import Pagination from '../pagination/Pagination';
 import { Modal, Button } from 'react-bootstrap';
-
 import classNames from 'classnames/bind';
 import styles from './Tables.module.scss';
+import EditUserModal from '../EditAdmin/EditUserModal';
 const cx = classNames.bind(styles);
 
 function StaffList() {
@@ -13,6 +13,20 @@ function StaffList() {
     const [currentData, setCurrentData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [staffIdToDelete, setStaffIdToDelete] = useState(null);
+
+    const [modalEdit, setModalEdit] = useState(false);
+
+
+    const [editStudentData, setEditStudentData] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        address: '',
+        img: '',
+        role: '',
+    });
+
+
 
     const fetchData = async () => {
         const token = localStorage.getItem('token');
@@ -39,6 +53,7 @@ function StaffList() {
         }
     }; 
 
+
     // handle delete staff
     const deleteStaff = (id) => {
         setShowModal(true);
@@ -51,13 +66,42 @@ function StaffList() {
             if (staffIdToDelete) {
                 await axios.get(`http://127.0.0.1:8000/api/delete-user/${staffIdToDelete}`);
 
-                const updatedList = staffList.filter(student => student.id !== staffIdToDelete);
+                const updatedList = staffList.filter(staff => staff.id !== staffIdToDelete);
                 setStaffList(updatedList);
                 setCurrentData(updatedList);
             }
             setShowModal(false);
         } catch (error) {
             console.error('Error deleting user:', error);
+        }
+    };
+
+    //------------ handle edit st-----------------------
+
+    const showModalEdit = (staff) => {
+        setEditStudentData(staff);
+        setModalEdit(true);
+    };
+
+
+    const saveChanges = async (updatedStaff) => {
+        try {
+            const response = await axios.post(`http://127.0.0.1:8000/api/update-user/${updatedStaff.id}`, updatedStaff);
+
+            if (response.ok) {
+                const updatedList = staffList.map((staff) => {
+                    if (staff.id === updatedStaff.id) {
+                        return { ...staff, ...updatedStaff };
+                    }
+                    return staff;
+                });
+                setStudentList(updatedList);
+                setCurrentData(updatedList);
+            } else {
+                console.log('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating user:', error);
         }
     };
 
@@ -84,7 +128,7 @@ function StaffList() {
                             <tr className={cx("table-row")} key={index}>
                                 <td className={cx("table-cell", "table-name")}>
                                     <div className={cx("table-cell-content")}>
-                                        <img className={cx("table-avatar")} src={staff.image} alt="" />
+                                        <img className={cx("table-avatar")} src={staff.img} alt="" />
                                     </div>
                                     <div className={cx("table-cell-content", "table-info")}>
                                         <div className={cx("table-info-inner")}>
@@ -118,10 +162,16 @@ function StaffList() {
                                         {staff.role}
                                     </button>
                                 </td>
-                                <td className={cx("table-cell", "table-action")} onClick={() => deleteStaff(staff.id)}>
+                                <td className={cx("table-cell", "table-action")} >
                                     <FaTrash
+                                        onClick={() => deleteStaff(staff.id)}
                                         className={cx("table-info-icon")}
                                         style={{ fontSize: '1rem', color: 'rgba(255, 0, 0, 1)' }} />
+                                    <FaEdit
+                                        onClick={() => showModalEdit(staff)}
+                                        className={cx("table-info-icon")}
+                                        style={{ fontSize: '1rem', color: 'rgba(0, 0, 255, 1)', marginLeft: '1rem' }}
+                                    />
                                 </td>
                             </tr>
                         ))}
@@ -145,6 +195,12 @@ function StaffList() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <EditUserModal
+                modalVisible={modalEdit}
+                onHide={() => setModalEdit(false)}
+                student={editStudentData}
+                saveChanges={saveChanges}
+            />
         </div>
     )
 }

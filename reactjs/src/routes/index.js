@@ -1,5 +1,4 @@
 import { WithoutLayout } from "../layouts";
-import { MenuAdmin } from "../Admin/Layouts/Sidebar";
 import Home from "../pages/Home/";
 import Login from "../pages/Login/Login";
 import Register from '../pages/Register/index';
@@ -8,7 +7,7 @@ import ChatRoomList from "../Admin/Tables/chatRoomList";
 import StaffList from "../Admin/Tables/staffList";
 import StudentList from "../Admin/Tables/StudentList";
 import { LayoutAdmin } from "../Admin";
-
+import EditUser from "../Admin/EditAdmin/EditUserModal";
 const publicRoutes = [
   { path: "/", component: Home },
   { path: "/Login", component: Login, layout: WithoutLayout },
@@ -24,7 +23,8 @@ const publicRoutes = [
   ,
   {
     path: "/admin/studentlist", component: StudentList, layout:LayoutAdmin
-  }
+  },
+  { path: "/Edit", component: EditUser, layout: WithoutLayout }
 ];
 
 export { publicRoutes };

@@ -198,7 +198,16 @@ select.form-control:focus::-ms-value {
 
 .form-group {
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
 }
+.form-control{
+  width: 100%;
+  height: 30px;
+  padding-left: 5px;
+  border-radius: 2px;
+}
+
 .form-text {
   display: block;
   margin-top: 0.25rem;
@@ -554,8 +563,8 @@ textarea.form-control.is-invalid {
   }
 }
 .btn:hover {
-  color: #858796;
-  text-decoration: none;
+  /* color: #858796;
+  text-decoration: none; */
 }
 .btn.focus,
 .btn:focus {
@@ -1339,7 +1348,7 @@ input[type="submit"].btn-block {
 }
 .dropdown-item {
   display: block;
-  width: 100%;
+  /* width: 100%; */
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
@@ -1348,6 +1357,7 @@ input[type="submit"].btn-block {
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+  cursor: pointer;
 }
 .dropdown-item:focus,
 .dropdown-item:hover {
@@ -1359,7 +1369,7 @@ input[type="submit"].btn-block {
 .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #4e73df;
+  background-color: #1d1e21;
 }
 .dropdown-item.disabled,
 .dropdown-item:disabled {
@@ -4347,6 +4357,7 @@ button.bg-dark:hover {
 }
 .border-0 {
   border: 0 !important;
+  border-radius: 0.35rem;
 }
 .border-top-0 {
   border-top: 0 !important;
@@ -6760,6 +6771,15 @@ background-image: linear-gradient(180deg, #000000 10%, #000000 100%);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
 
+.form-control__img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+}
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+.form-group > input{
+  box-sizing: border-box;
 }

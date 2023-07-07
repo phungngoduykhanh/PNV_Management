@@ -11,9 +11,8 @@ function Header() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         setTimeout(() => {
-            window.location.reload(false)
+            window.location.href = '/login';
         }, 1500);
-        navigate('/login'); 
     };
 
     useEffect(() => {

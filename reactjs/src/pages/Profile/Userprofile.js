@@ -3,24 +3,24 @@ import './Userprofile.css'; // Import the CSS file for styling
 import axios from 'axios';
 
 const UserProfileEdit = () => {
-  
+
   const [user, setUser] = useState({
     name: '',
     phone: '',
     email: '',
     address: '',
     img: '',
-    role: '', 
+    role: '',
   });
 
-  useEffect(()=>{
-    const token = localStorage.getItem('token'); 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
     console.log(token);
     if (token) {
       axios
         .get('http://127.0.0.1:8000/api/user', {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         })
         .then(response => {
@@ -30,7 +30,7 @@ const UserProfileEdit = () => {
           console.error(error);
         });
     }
-  },[])
+  }, [])
 
   const [editMode, setEditMode] = useState(false);
 
@@ -59,15 +59,15 @@ const UserProfileEdit = () => {
   const handleSave = () => {
     console.log(user);
     axios.post(`http://127.0.0.1:8000/api/update-user/${user.id}`, user)
-        .then(response => {
-          setUser(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-      setTimeout(() => {
-        window.location.reload(false);
-      }, 1000);
+      .then(response => {
+        setUser(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1000);
   };
 
   const handleImageChange = (e) => {
@@ -136,7 +136,7 @@ const UserProfileEdit = () => {
             </label>
             <br />
             <label>
-              <select value={user.role}  name="role" id="role" onChange={handleRole}>
+              <select value={user.role} name="role" id="role" onChange={handleRole}>
                 <option value="teacher">Teacher</option>
                 <option value="student">Student</option>
               </select>

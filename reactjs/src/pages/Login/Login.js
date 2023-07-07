@@ -87,53 +87,55 @@ const Login = () => {
   };
 
   return (
-    <div className={cx('container')}>
-      <div className={cx('login-form')}>
-        <div className={cx('login-icon')}>
-          <i className={cx('fa-sharp fa-solid fa-xmark')} />
-        </div>
-        <div className={cx('login-title')}>Login</div>
-        <div className={cx('login-input-parts')}>
-          <div className={cx('input-container')}>
-            <span> <i className={cx('fas fa-envelope')} /></span>
-            <input
-              className={cx('login-input')}
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+    <>
+      <div className={cx('container')}>
+        <div className={cx('login-form')}>
+          <div className={cx('login-icon')}>
+            <i className={cx('fa-sharp fa-solid fa-xmark')} />
           </div>
-          <div className={cx('input-container')}>
-            <input
-              id="pwd"
-              type={pwShown ? 'text' : 'password'}
-              className={cx('login-input')}
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Password"
-            />
-            <span onClick={togglePasswordVisibility}>
-              <FontAwesomeIcon icon={pwShown ? faEye : faEyeSlash} id="eye" />
-            </span>
-          </div>
+          <div className={cx('login-title')}>Login</div>
+          <div className={cx('login-input-parts')}>
+            <div className={cx('input-container')}>
+              <span> <i className={cx('fas fa-envelope')} /></span>
+              <input
+                className={cx('login-input')}
+                placeholder="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={cx('input-container')}>
+              <input
+                id="pwd"
+                type={pwShown ? 'text' : 'password'}
+                className={cx('login-input')}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />
+              <span onClick={togglePasswordVisibility}>
+                <FontAwesomeIcon icon={pwShown ? faEye : faEyeSlash} id="eye" />
+              </span>
+            </div>
 
-          <input className={cx('login-input', 'button')} type="button" value="Log In" onClick={handleLogin} />
-        </div>
-        <div className={cx('login-bottom')}>
-          <div className={cx('login-remember')}>
-            <input type="checkbox" id="Remember-me" name="Remember-me" checked={rmbAccount} onChange={handleRmbAccountChange} />
-            Remember me
+            <input className={cx('login-input', 'button')} type="button" value="Log In" onClick={handleLogin} />
           </div>
-          <div className={cx('login-forgot')}>Forgot password?</div>
-        </div>
-        <div className={cx('login-signup')}>
-          Don't have an account? <NavLink to="http://localhost:3000/register">Register</NavLink>
+          <div className={cx('login-bottom')}>
+            <div className={cx('login-remember')}>
+              <input type="checkbox" id="Remember-me" name="Remember-me" checked={rmbAccount} onChange={handleRmbAccountChange} />
+              Remember me
+            </div>
+            <div className={cx('login-forgot')}>Forgot password?</div>
+          </div>
+          <div className={cx('login-signup')}>
+            Don't have an account? <NavLink to="http://localhost:3000/register">Register</NavLink>
+          </div>
         </div>
       </div>
       <ToastContainer />
-    </div>
+    </>
   );
 }
 

@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import Pagination from '../pagination/Pagination';
 import axios from 'axios';
-import { FaPhone, FaTrash } from 'react-icons/fa';
+import { FaPhone, FaTrash, FaEdit } from 'react-icons/fa';
 import classNames from 'classnames/bind';
 import styles from '../Tables/Tables.module.scss';
 const cx = classNames.bind(styles);
 import { Modal, Button } from 'react-bootstrap';
+import EditUserModal from '../EditAdmin/EditUserModal';
+
 
 
 function StudentList() {
     const [studentList, setStudentList] = useState([]);
     const [currentData, setCurrentData] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [modalEdit, setModalEdit] = useState(false);
     const [studentIdToDelete, setStudentIdToDelete] = useState(null);
+
+    const [editStudentData, setEditStudentData] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        address: '',
+        img: '',
+        role: '',
+    });
+
 
     // call api show student
     const fetchData = async () => {
@@ -41,7 +54,7 @@ function StudentList() {
     };
 
 
-    // handle delete student
+    // handle delete student show modal
     const deleteStudent = (id) => {
         setShowModal(true);
         setStudentIdToDelete(id);
@@ -63,9 +76,38 @@ function StudentList() {
         }
     };
 
+
+    //------------ handle edit student-----------------------
+
+    const showModalEdit = (student) => {
+        setEditStudentData(student);
+        setModalEdit(true);
+    };
+
+    const saveChanges = async (updatedStudent) => {
+        try {
+            const response = await axios.post(`http://127.0.0.1:8000/api/update-user/${updatedStudent.id}`, updatedStudent);
+
+            if (response.ok) {
+                const updatedList = studentList.map((student) => {
+                    if (student.id === updatedStudent.id) {
+                        return { ...student, ...updatedStudent };
+                    }
+                    return student;
+                });
+                setStudentList(updatedList);
+                setCurrentData(updatedList);
+            } else {
+                console.log('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
+    };
+
     useEffect(() => {
         fetchData();
-    }, []); 
+    }, []);
 
     return (
         <div className={cx("container-Admin__table")}>
@@ -85,7 +127,7 @@ function StudentList() {
                             <tr className={cx("table-row")} key={index}>
                                 <td className={cx("table-cell", "table-name")}>
                                     <div className={cx("table-cell-content")}>
-                                        <img className={cx("table-avatar")} src={student.image} alt="" />
+                                        <img className={cx("table-avatar")} src={student.img} alt="" />
                                     </div>
                                     <div className={cx("table-cell-content", "table-info")}>
                                         <div className={cx("table-info-inner")}>
@@ -108,10 +150,16 @@ function StudentList() {
                                 </td>
                                 <td className={cx("table-cell")}>{student.email}</td>
                                 <td className={cx("table-cell")}>{student.password}</td>
-                                <td className={cx("table-cell", "table-action")} onClick={() => deleteStudent(student.id)}>
+                                <td className={cx("table-cell", "table-action")}>
                                     <FaTrash
+                                        onClick={() => deleteStudent(student.id)}
                                         className={cx("table-info-icon")}
                                         style={{ fontSize: '1rem', color: 'rgba(255, 0, 0, 1)' }}
+                                    />
+                                    <FaEdit
+                                        onClick={() => showModalEdit(student)}
+                                        className={cx("table-info-icon")}
+                                        style={{ fontSize: '1rem', color: 'rgba(0, 0, 255, 1)', marginLeft: '1rem' }}
                                     />
                                 </td>
                             </tr>
@@ -136,6 +184,13 @@ function StudentList() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <EditUserModal
+                modalVisible={modalEdit}
+                onHide={() => setModalEdit(false)}
+                student={editStudentData}
+                saveChanges={saveChanges}
+            />
+
         </div>
     );
 }
