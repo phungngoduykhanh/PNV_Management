@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SessionUser;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class AdminConstroller extends Controller
 {
@@ -45,4 +44,6 @@ class AdminConstroller extends Controller
 
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+
 }
