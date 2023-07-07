@@ -1,6 +1,13 @@
 <?php
 
+use App\Http\Controllers\API\AdminConstroller;
+use App\Http\Controllers\API\ChatRoomController;
+use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\UserController;
+
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +24,39 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//API register
+Route::post('register', [RegisterController::class, 'register']);
+
+Route::get('check-user', [RegisterController::class, 'checkUser']);
+
+//API user
+Route::get('user', [UserController::class, 'index']);
+
+Route::post('update-user/{id}', [UserController::class, 'updateUser']);
+
+Route::get('/users/search/{term}/{id}', [UserController::class, 'search']);
+
+
+//Login token
+Route::post('login', [LoginController::class, 'login']);
+
+Route::post('refresh-token', [LoginController::class, 'refreshToken']);
+
+//API class
+Route::get('chatroom', [ChatRoomController::class, 'index']);
+
+Route::get('chatrooms', [ChatRoomController::class, 'getChatRoom']);
+
+Route::post('create-chatroom', [ChatRoomController::class, 'createChatRoomAndInvite']);
+
+Route::get('firebase-chatroom/{id}', function (Request $request) {
+    $id_chatroom = $request->id;
+});
+
+route::get('deleteChatroom/{id}', [ChatRoomController::class, 'deleteChatRoom']);
+
+//API Admin
+Route::get('Admin-user', [AdminConstroller::class, 'index']);
+
+Route::get('/delete-user/{id}', [AdminConstroller::class, 'deleteUser']);
