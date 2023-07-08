@@ -1,0 +1,11 @@
+.menu-item{
+    display: block;
+    margin: 0;
+    font-size: 27px;
+    color: white;
+    overflow: auto;
+    text-decoration: none !important;
+    .icon{
+        margin-right: 17px;
+    }
+}
