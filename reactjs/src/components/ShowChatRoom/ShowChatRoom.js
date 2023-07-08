@@ -22,7 +22,6 @@ function ShowChatRoom() {
               Authorization: `Bearer ${token}`, 
             },
           }).then(data => {
-                console.log(data);
                 setChatroom(data.data);
             })
             .catch(error => {

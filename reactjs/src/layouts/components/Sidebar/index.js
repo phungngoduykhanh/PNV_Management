@@ -3,21 +3,28 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {MenuItem} from './Menu';
 import logo from '../../../assets/images/logo.svg';
-import { NavLink, useLocation, useParams } from "react-router-dom";
-import {faComments, faHouse,faCalendarDays, faGear, faCircleQuestion, faBug, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useLocation, useParams } from "react-router-dom";
+import {faComments, faHouse,faCalendarDays, faGear, faCircleQuestion, faBug, faCirclePlus, faLock} from '@fortawesome/free-solid-svg-icons';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 import {Button, Collapse,Typography} from 'antd';
+import AddChannel from '../../../components/AddChannel/AddChannel';
+import { AppContext } from '../../../Context/AppProvider';
 const {Panel} = Collapse;
 
 function Sidebar() {
-
   const {id} = useParams();
 
+  const { setisAddChannelVisible,useRealtimeChannels,setSelectedChannelId, channels } =useContext(AppContext);
+  
+  useRealtimeChannels(id);
+
   const [activeItem, setActiveItem] = useState('Home');
+
   const location = useLocation();
+  
 
   useEffect(() => {
     const currentPath = location.pathname;
@@ -38,28 +45,43 @@ function Sidebar() {
       setActiveItem('Home'); 
     }
   }, [location]);
+  
 
   const isChatroomPath = id !== undefined;
 
+  const handleAddChannel= ()=>{
+    setisAddChannelVisible(true);
+  }
+
     return (
       <aside className={cx('wrapper')}>
-        <NavLink to="/"><img className={cx('logo')} src={logo}/></NavLink>
+        <a href='/'><img className={cx('logo')} src={logo}/></a>
 
           {isChatroomPath ? (
             <nav className={cx("navbar-chatroom")}>
                 <Collapse ghost  defaultActiveKey={['1']} >
                   <Panel header='Channels' key='1' className="custom-collapse">
-                      <Typography.Link><span className={cx('icon-public')} >#</span> Room 1</Typography.Link>
-                      <Typography.Link><span className={cx('icon-public')} >#</span> Room 2</Typography.Link>
-                      <Typography.Link><span className={cx('icon-public')} >#</span> Room 3</Typography.Link>
+
+                    {channels.map((channel) => (
+                      <Typography.Link key={channel.id} onClick={()=>setSelectedChannelId(channel.id)}>
+                        <span className={cx("icon-public")}>
+                            {channel.mode === "public" ? "#" : <FontAwesomeIcon icon={faLock}/>}  
+                        </span> 
+                        <span className={cx("channel-name")}>
+                          {channel.channelname}
+                        </span>
+                      </Typography.Link>
+                    ))}
+
                   </Panel>
                 </Collapse>
                 <div className={cx('button-container')}>
-                  <Button type='text'>
+                  <Button type='text' onClick={handleAddChannel}>
                     <FontAwesomeIcon icon={faCirclePlus}/>
-                    Add Channels
+                      Add Channels
                     </Button>
                 </div>
+                <AddChannel chatroom_id={id}/>
             </nav>
           ):(
             <nav className={cx("navbar")}>
@@ -76,7 +98,6 @@ function Sidebar() {
             </nav>
           )
           }
-        
       </aside>
     )   
    }

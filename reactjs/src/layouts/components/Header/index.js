@@ -23,7 +23,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setTimeout(() => {
-      window.location.reload(false)
+      window.location.href= "http://localhost:3000/";
     }, 1500);
   };
     useEffect(()=>{

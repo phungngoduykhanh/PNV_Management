@@ -5,9 +5,11 @@ import { DefaultLayout } from "./layouts";
 import { AuthProvider } from "./components/AuthContext";
 
 import './assets/styles/styles.module.scss';
+import AppProvider from "./Context/AppProvider";
 function App() {
   return (
     <AuthProvider>
+      <AppProvider>
       <Router>
         <div className="App">
           <Routes>
@@ -36,6 +38,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      </AppProvider>
     </AuthProvider>
   );
 }
