@@ -1,0 +1,88 @@
+.wrapper {
+    background-color: rgba(0, 0, 0, 1);
+    padding: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+    width: 16%;
+    flex: 1;
+    .logo{
+        display: block;
+        width: 111px;
+        height: 111px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+    
+    .navbar{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 95%;
+        div{
+            a{
+                margin: 30px 0;
+            }
+        }
+    }
+    .navbar-chatroom{
+        display: block;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 95%;
+        .button-container{
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+           svg{
+            color: white;
+            margin-right: 8px;
+           }
+        }
+        span,div{
+            color: white;
+            user-select: none;
+        }
+        .icon-public{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        div{
+            div{
+                div{
+                    div{
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        a{
+                            margin: 16px 0;
+                            margin-left: 25px;
+                            font-size: 18px;
+                            color: white;
+                        }    
+                    }
+                }
+            }
+        }
+        span{
+            font-size: large;
+            font-weight: bold;
+            svg{
+                font-size: 15px;
+                margin-top: 7px;
+            }
+        }
+    }
+}
+
+
+
