@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\ChannelController;
 use App\Http\Controllers\API\ChatRoomController;
+use App\Http\Controllers\API\EnrollmentController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\UserController;
@@ -36,6 +38,8 @@ Route::post('update-user/{id}', [UserController::class, 'updateUser']);
 
 Route::get('/users/search/{term}/{id}', [UserController::class, 'search']);
 
+Route::post('search', [UserController::class,'searchEmail']);
+
 //Login token
 Route::post('login', [LoginController::class, 'login']);
 
@@ -48,7 +52,21 @@ Route::get('chatrooms', [ChatRoomController::class, 'getChatRoom']);
 
 Route::post('create-chatroom', [ChatRoomController::class, 'createChatRoomAndInvite']);
 
-Route::get('firebase-chatroom/{id}',function(Request $request){
-    $id_chatroom = $request->id;
-    
-});
+Route::post('addchannel/{token}',[ChannelController::class,'addChannel']);
+
+Route::get('getemail/{chatroom_id}',[ChatRoomController::class,'getemailUserChatRoom']);
+
+Route::get('confirm/{token}', [EnrollmentController::class,'confirm']);
+
+Route::get('member/{id}', [EnrollmentController::class,'getmember']);
+
+Route::get('addmember', [EnrollmentController::class,'addmember']);
+
+
+// Route::get('firebase-chatroom/{id}', function (Request $request) {
+//     $id_chatroom = $request->id;
+// });
+
+// Route::get('Admin-user', [AdminConstroller::class, 'index']);
+
+// Route::get('/delete-user/{id}', [AdminConstroller::class, 'deleteUser']);

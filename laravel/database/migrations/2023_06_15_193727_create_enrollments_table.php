@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('chatroom_id');
             $table->string('status')->default('pending');
+            $table->string('token');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('chatroom_id')->references('id')->on('chat_rooms')->onDelete('cascade');

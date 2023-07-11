@@ -26,7 +26,7 @@ class ChatRoom extends Model
     public function createDefaultChannel() {
         $channel = new Channel();
         $channel->channelname = 'general';
-        $channel->mode = 'general';
+        $channel->mode = 'public';
         $this->channels()->save($channel);
         return $channel;
     }

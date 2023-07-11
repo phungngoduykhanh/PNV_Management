@@ -10,25 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         if (!$request->bearerToken()) {
             return response()->json([
                 'error' => 'Unauthorized',
             ], 401);
         }
-        
+
         $sessionUser = SessionUser::where('token', $request->bearerToken())->first();
         if (!$sessionUser) {
             return response()->json([
                 'error' => 'Session user not found',
             ], 404);
         }
-        $user =User::find($sessionUser->user_id);
+        $user = User::find($sessionUser->user_id);
 
         return response()->json($user);
     }
 
-    public function updateUser(Request $request){
+    public function updateUser(Request $request)
+    {
         $id = $request->id;
 
         $userData = $request->all();
@@ -43,15 +45,41 @@ class UserController extends Controller
         }
     }
 
-    public function search($term, $id){
-        
+    public function search($term, $id)
+    {
+
         $currentUserId = $id;
-        
-        $users = User::where('email', 'LIKE', "%".$term."%")
-        ->whereNotIn('id', [$currentUserId])
-        ->get();
+
+        $users = User::where('email', 'LIKE', "%" . $term . "%")
+            ->whereNotIn('id', [$currentUserId])
+            ->get();
 
         return response()->json($users);
     }
 
+    public function searchEmail(Request $request)
+    {
+        $term = $request->term;
+        $members = $request->members;
+        if($term == ""){
+            return response()->json(
+                []
+            );
+        }
+        $emails = [];
+        foreach ($members as $key => $member) {
+            $email = $member['email'];
+            $emails[] = $email;
+        }
+        
+        $emails = User::whereNotIn('email', $emails)
+        ->where('email', 'LIKE', "%" . $term . "%")
+        ->pluck('email')
+        ->toArray();
+
+        return response()->json(
+            $emails
+        );
+
+    }
 }

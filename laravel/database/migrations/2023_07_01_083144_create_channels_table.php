@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('channelname');
             $table->unsignedBigInteger('chatroom_id');
             $table->string('mode');
+            $table->json('user_ids')->nullable();
             $table->timestamps();
 
             $table->foreign('chatroom_id')->references('id')->on('chat_rooms')->onDelete('cascade');

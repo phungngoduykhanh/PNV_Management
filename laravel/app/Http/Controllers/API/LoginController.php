@@ -19,8 +19,15 @@ class LoginController extends Controller
             'password'=> $request->password
         ];
         if (auth()->attempt($dataCheckLogin)) {
+            $user = auth()->user();
             $userId = auth()->id();
             $checkTokenExit = SessionUser::where('user_id',$userId)->first();
+            if($user->status === 'delete'){
+                return response()->json([
+                    'code' => 401,
+                    'message' => 'Your account has been deleted'
+                ], 401);
+            }
             if(empty($checkTokenExit)){
 
             $token = Str::random(40);

@@ -12,16 +12,17 @@ class ChatRoomInvitation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $chatroom;
+    public $chatroom,$token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(ChatRoom $chatroom)
+    public function __construct(ChatRoom $chatroom,$token)
     {
         $this->chatroom = $chatroom;
+        $this->token = $token;
     }
 
     /**
@@ -32,6 +33,7 @@ class ChatRoomInvitation extends Mailable
     public function build()
     {
         return $this->subject('Invitation to Chatroom')
-                    ->view('emails.chatroom_invitation');
+                    ->view('emails.chatroom_invitation')
+                    ->with(['chatroom' => $this->chatroom, 'token' => $this->token]);;
     }
 }

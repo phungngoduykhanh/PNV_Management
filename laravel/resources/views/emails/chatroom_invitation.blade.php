@@ -15,7 +15,7 @@
         <li>Owner: {{ $chatroom->owner->name }}</li>
     </ul>
     <p>Please click the following link to confirm your participation:</p>
-    <a href="">Confirm Invitation</a>
+    <a href="http://127.0.0.1:8000/api/confirm/{{$token}}">Confirm Invitation</a>
     <p>If you have any questions, please feel free to contact us.</p>
     <p>Thank you!</p>
 </body>
