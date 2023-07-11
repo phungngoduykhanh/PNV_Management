@@ -1,0 +1,97 @@
+
+.container{
+  background-color: black;
+  width: 700px;
+  height: 600px;
+  text-align: center;
+  border: 2px rgba(225,255 , 255, .5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: absolute;
+ left: 50%;
+ top: 45%;
+ transform: translate(-50%, -50%);
+ .text-center{
+  color: white;
+  position: relative;
+  top: 40px;
+  right: 4px;
+  text-align: center;
+  font-size: 40px;
+}
+.form input{
+margin: 10px auto;
+width:100%;
+padding:15px 30px 15px 15px;
+font-size:18px;
+color:rgba(255, 255, 255, 1);
+background:rgba(0, 0, 0, 1);
+border: none;
+border-bottom: 5px solid rgba(255, 255, 255, 1);
+outline: none;
+width: 330px;
+
+}
+.submit{
+  color: white;
+  position: relative;
+  top: 10px;
+}
+
+.my-3{
+  color: white;
+  position: relative;
+  top: 10px;
+}
+.button{
+  background-color: #35A6F2;
+  width: 300px;
+  height: 40px;
+  top: 10px;
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
+  position: relative;
+  right: 16px;
+}
+.term{
+color: #ffffff;
+}
+i {
+  color: #35A6F2;
+}
+.custom-icon {
+  color: #ffffff;
+  font-size: 24px;
+  position: relative;
+  right: 30px;
+  /* Các thuộc tính CSS khác */
+}
+.aTimesCircle{
+  color: #ffffff;
+  font-size: 35px;
+  position: relative;
+  left: 270px;
+  bottom: 40px;
+  font-size: 24px;
+}
+.aCheckToSlot{
+  font-size: 35px;
+  position: relative;
+  right: 150px;
+  bottom: -20px;
+  font-size: 24px;
+  
+}
+.fa-check-square {
+  position:relative ;
+  
+}
+input#Name.form-control{
+background-color:black;
+}
+}
